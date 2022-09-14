@@ -1,4 +1,125 @@
+* {
+  padding: 0%;
+  margin: 0;
+}
+
 body {
-  background-color: blanchedalmond;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(233, 105, 105);
+  color: #0a1520;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  background-color: black;
+  color: rgb(243, 236, 226);
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.logo {
+  padding: 10px 0;
+  font-size: 1.6em;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.logo:hover {
+  color: rgb(235, 104, 52);
+  transform: scale(1.2);
+  transition: 0.35s;
+}
+
+.nav-items {
+  padding: 20px 0 10px;
+}
+
+.nav-item {
+  float: left;
+  display: block;
+  font-size: 1.4rem;
+  padding: 0 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-item:hover {
+  color: rgb(235, 104, 52);
+  transform: scale(1.2);
+  transition: 0.35s;
+}
+
+.title-container {
+  padding: 150px 0 0px;
+  width: 50%;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 60px;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.subtitle {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 25px;
+}
+
+.phrase-container {
+  padding: 100px 0;
+}
+
+.phrase {
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+.buttons-container {
+  width: 50%;
+  margin: auto;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgb(58, 56, 56);
+  font-size: 15px;
+  font-family: 'Roboto Slab', serif;
+  text-decoration: none;
+}
+
+.find {
+  position: absolute;
+  right: 50%;
+  background-color: rgb(219, 90, 68);
+  color: rgb(236, 231, 231);
+}
+
+.find:hover {
+  background-color: rgb(179, 62, 46);
+  transform: scale(1.1);
+  transition: 0.35s;
+}
+
+.register {
+  position: absolute;
+  left: 50%;
+  background-color: rgb(200, 202, 55);
+}
+
+.register:hover {
+  background-color: rgb(181, 221, 107);
+  transform: scale(1.1);
+  transition: 0.35s;
 }

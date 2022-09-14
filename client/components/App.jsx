@@ -1,21 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { getUsers } from '../api'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+
+import Nav from './Nav'
+import Home from './Home'
+import About from './About'
+import Contact from './Contact'
+import Register from './Register'
+import OpenMic from './OpenMic'
+import Update from './Update'
 
 function App() {
-  const [users, setUsers] = useState([])
-  
-  useEffect(async () => {
-    const arr = await getUsers()
-    setUsers(arr)
-  }, [])
-
   return (
     <>
-      <h1>React is running!</h1>
-      <h2>Users:</h2>
-      <ul>
-        {users.map(user => <li key={user.id}>{user.name}</li>)}
-      </ul>
+      <Nav />
+
+      <div>
+        <Routes>
+          <Route path={'/'} element={<Home />} />
+          <Route path={'/about'} element={<About />} />
+          <Route path={'/contact'} element={<Contact />} />
+          <Route path={'/register'} element={<Register />} />
+          <Route path={'/search'} element={<OpenMic />} />
+          <Route path={'/update'} element={<Update />} />
+        </Routes>
+      </div>
     </>
   )
 }
