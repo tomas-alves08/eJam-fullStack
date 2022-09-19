@@ -4,7 +4,7 @@ const url = '/api/v1/openMics'
 
 export async function getOpenMicsAPI() {
   const resp = await request.get(url)
-  // console.log('API', resp.body)
+  console.log('API', resp.body)
   return resp.body
 }
 

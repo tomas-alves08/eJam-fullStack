@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Nav from './Nav'
@@ -10,6 +10,9 @@ import OpenMic from './OpenMic'
 import Update from './Update'
 
 function App() {
+  const [inputs, setInputs] = useState([])
+  // const [updateId, setUpdateId] = useState('')
+
   return (
     <>
       <Nav />
@@ -19,9 +22,21 @@ function App() {
           <Route path={'/'} element={<Home />} />
           <Route path={'/about'} element={<About />} />
           <Route path={'/contact'} element={<Contact />} />
-          <Route path={'/register'} element={<Register />} />
+          <Route
+            path={'/register'}
+            element={
+              <Register
+                inputs={inputs}
+                setInputs={setInputs}
+                // setUpdateId={setUpdateId}
+              />
+            }
+          />
           <Route path={'/search'} element={<OpenMic />} />
-          <Route path={'/update'} element={<Update />} />
+          <Route
+            path={'/update'}
+            element={<Update inputs={inputs} setInputs={setInputs} />}
+          />
         </Routes>
       </div>
     </>

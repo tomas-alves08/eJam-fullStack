@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import { addOpenMicAPI } from '../api'
-import { useDispatch } from 'react-redux'
 
 const Form = ({ inputs, setInputs }) => {
-  const dispatch = useDispatch()
-
   const [formData, setFormData] = useState({
     venue: '',
-    address: '',
+    location: '',
     city: '',
     start_time: '',
     finish_time: '',
@@ -28,13 +25,12 @@ const Form = ({ inputs, setInputs }) => {
     console.log('Handle Submit:', formData)
 
     const newOpenMic = await addOpenMicAPI(formData)
-    dispatch(newOpenMic)
 
     setInputs([...inputs, newOpenMic])
 
     setFormData({
       venue: '',
-      address: '',
+      location: '',
       city: '',
       start_time: '',
       finish_time: '',
