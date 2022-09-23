@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import { addOpenMicAPI } from '../api'
 
-const Form = ({ inputs, setInputs }) => {
+const Form = ({
+  inputs,
+  setInputs,
+  displayAddForm,
+  setDisplayAddForm,
+  setDisplayUpdateForm,
+}) => {
   const [formData, setFormData] = useState({
     venue: '',
     location: '',
@@ -37,11 +43,24 @@ const Form = ({ inputs, setInputs }) => {
     })
   }
 
+  const handleCancel = () => {
+    setDisplayAddForm(false)
+    setDisplayUpdateForm(false)
+  }
+
   //   console.log(newOpenMic)
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="register-form">
+        <label>
+          Region:
+          <select>
+            <option value="north_island">North Island</option>
+            <option value="south_island">South Island</option>
+          </select>
+        </label>
+
         <label>
           Venue:
           <input
@@ -78,25 +97,26 @@ const Form = ({ inputs, setInputs }) => {
         <label>
           Start Time:
           <input
-            type="text"
+            type="time"
             name="start_time"
             value={formData.start_time || ''}
             onChange={handleChange}
-            placeholder="Insert day"
+            placeholder="Insert Start Time"
           />
         </label>
         <label>
           Finish Time:
           <input
-            type="text"
+            type="time"
             name="finish_time"
             value={formData.finish_time || ''}
             onChange={handleChange}
-            placeholder="Insert Time"
+            placeholder="Insert End Time"
           />
         </label>
 
-        <button>Submit</button>
+        <button>{displayAddForm ? 'Add' : 'Update'}</button>
+        <button onClick={handleCancel}>Cancel</button>
       </form>
     </div>
   )

@@ -6,12 +6,11 @@ import Home from './Home'
 import About from './About'
 import Contact from './Contact'
 import Register from './Register'
+import OpenMics from './OpenMics'
 import OpenMic from './OpenMic'
-import Update from './Update'
 
 function App() {
   const [inputs, setInputs] = useState([])
-  // const [updateId, setUpdateId] = useState('')
 
   return (
     <>
@@ -24,18 +23,12 @@ function App() {
           <Route path={'/contact'} element={<Contact />} />
           <Route
             path={'/register'}
-            element={
-              <Register
-                inputs={inputs}
-                setInputs={setInputs}
-                // setUpdateId={setUpdateId}
-              />
-            }
+            element={<Register inputs={inputs} setInputs={setInputs} />}
           />
-          <Route path={'/search'} element={<OpenMic />} />
+          <Route path={'/search'} element={<OpenMics />} />
           <Route
-            path={'/update'}
-            element={<Update inputs={inputs} setInputs={setInputs} />}
+            path="openMics/:openMicId"
+            element={<OpenMic inputs={inputs} />}
           />
         </Routes>
       </div>

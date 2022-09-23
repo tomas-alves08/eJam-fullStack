@@ -8,6 +8,12 @@ export async function getOpenMicsAPI() {
   return resp.body
 }
 
+export async function getOneOpenMicAPI(id) {
+  const resp = await request.get(`${url}/${id}`)
+  console.log('API Get One OpenMic: ', resp.body)
+  return resp.body
+}
+
 export async function addOpenMicAPI(openMic) {
   console.log('Add API:', openMic)
 
@@ -18,8 +24,9 @@ export async function addOpenMicAPI(openMic) {
 
 export async function deleteOpenMicAPI(id) {
   console.log('Delete API: ', id)
+  console.log(`${url}/${id}`)
 
-  const deleteResp = await request.delete(`${url}/${id}`)
+  const deleteResp = await request.del(`${url}/${id}`)
   console.log('Delete Response API: ', deleteResp.body)
   return deleteResp.body
 }

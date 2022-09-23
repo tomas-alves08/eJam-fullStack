@@ -1,14 +1,33 @@
 import React, { useState } from 'react'
 import Form from './Form'
-import OpenMic from './OpenMic'
+import OpenMic from './OpenMics'
 
 const Register = ({ inputs, setInputs }) => {
-  // const [inputs, setInputs] = useState([])
+  const [displayAddForm, setDisplayAddForm] = useState(false)
+  const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
+
   console.log(inputs)
   return (
     <>
-      <Form inputs={inputs} setInputs={setInputs} />
-      <OpenMic inputs={inputs} />
+      <OpenMic
+        inputs={inputs}
+        setInputs={setInputs}
+        displayAddForm={displayAddForm}
+        setDisplayAddForm={setDisplayAddForm}
+        displayUpdateForm={displayUpdateForm}
+        setDisplayUpdateForm={setDisplayUpdateForm}
+      />
+      <button onClick={() => setDisplayAddForm(true)}>Add New Open Mic</button>
+      {displayAddForm && (
+        <Form
+          inputs={inputs}
+          setInputs={setInputs}
+          displayAddForm={displayAddForm}
+          setDisplayAddForm={setDisplayAddForm}
+          displayUpdateForm={displayUpdateForm}
+          setDisplayUpdateForm={setDisplayUpdateForm}
+        />
+      )}
     </>
   )
 }

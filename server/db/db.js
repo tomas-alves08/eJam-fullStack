@@ -4,6 +4,10 @@ const config = require('./knexfile').development
 // eslint-disable-next-line no-unused-vars
 const conn = require('knex')(config)
 
+function getOneOpenMic(id, db = conn) {
+  return db('openMics_').select().where('id', id).first()
+}
+
 function getAllOpenMics(db = conn) {
   return db('openMics_').select()
 }
@@ -17,6 +21,7 @@ function getTheOpenMic(id, db = conn) {
 }
 
 function deleteOneOpenMic(id, db = conn) {
+  console.log('DB: ', id, typeof id)
   return db('openMics_').del().where('id', id)
 }
 
@@ -26,6 +31,7 @@ function updateOneOpenMic(openMic, db = conn) {
 
 module.exports = {
   getAllOpenMics,
+  getOneOpenMic,
   addOpenMic,
   getTheOpenMic,
   deleteOneOpenMic,

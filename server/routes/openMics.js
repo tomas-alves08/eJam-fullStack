@@ -13,6 +13,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const foundOpenMic = await db.getOneOpenMic(id)
+    console.log('BackEnd Get One OpenMic: ', foundOpenMic)
+    res.json(foundOpenMic)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+})
+
 router.post('/', async (req, res) => {
   const { venue, location, city, start_time, finish_time } = req.body
   const newOpenMic = {
@@ -35,13 +47,14 @@ router.post('/', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-  const id = req.params.id
+  const id = Number(req.params.id)
 
+  console.log('Router Delete: ', id)
   try {
     const deletedOpenMic = await db.deleteOneOpenMic(id)
     console.log('Router: ', deletedOpenMic)
-    const remainderOpenMics = await db.getAllOpenMics()
-    res.json(remainderOpenMics)
+    // const remainderOpenMics = await db.getAllOpenMics()
+    res.json(deletedOpenMic)
   } catch (err) {
     res.status(500).send(err.message)
   }

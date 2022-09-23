@@ -1,50 +1,68 @@
 import React, { useState, useEffect } from 'react'
-import { getOpenMicsAPI, deleteOpenMicAPI } from '../api'
-import { Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import { getOneOpenMicAPI, deleteOpenMicAPI } from '../api'
 
 import Form from './Form'
 
 const OpenMic = ({ inputs }) => {
-  const [displayOpenMic, setDisplayOpenMic] = useState([])
+  const [foundOpenMic, setFoundOpenMic] = useState({})
+  const [displayUpdate, setDisplayUpdate] = useState(false)
+  const { openMicId } = useParams()
+  const navigate = useNavigate()
 
-  console.log(inputs)
+  console.log('inputs: ', inputs)
+  console.log('openMic ID: ', openMicId)
 
-  const handleLoad = async () => {
-    const openMicsArr = await getOpenMicsAPI()
-    setDisplayOpenMic([...openMicsArr, inputs])
+  const handleLoadOpenMic = async () => {
+    const selectedOpenMic = await getOneOpenMicAPI(openMicId)
+    setFoundOpenMic(selectedOpenMic)
   }
 
   const handleDelete = async (id) => {
     const openMicArr = await deleteOpenMicAPI(id)
-    setDisplayOpenMic(openMicArr)
+    // setDisplayFoundMic(openMicArr)
+    alert('Open Deleted')
+    navigate('/register')
   }
 
   const handleUpdate = async (id) => {
-    console.log(id)
+    setDisplayUpdate(true)
   }
 
   useEffect(() => {
-    handleLoad()
-  }, [inputs])
+    handleLoadOpenMic()
+  }, [])
 
   return (
     <>
-      <h1>Open Mics</h1>
-      <button onClick={handleLoad}>Get Open Mics</button>
-      {displayOpenMic?.map((openMic) => (
-        <>
-          <h2>{openMic?.venue}</h2>
-          <p>Address: {openMic?.location}</p>
-          <p>City: {openMic?.city}</p>
-          <p>
-            From {openMic?.start_time} to {openMic?.finish_time}
-          </p>
-          <button onClick={() => handleDelete(openMic?.id)}>Delete</button>
-          <Link to="/update">
-            <button onClick={() => handleUpdate(openMic?.id)}>Update</button>
-          </Link>
-        </>
-      ))}
+      {foundOpenMic !== null && <h2>{foundOpenMic?.venue}</h2>}
+      {foundOpenMic !== null && <h3>City: {foundOpenMic?.city}</h3>}
+      {foundOpenMic !== null && <h3>Day: {foundOpenMic?.day}</h3>}
+      {foundOpenMic !== null && (
+        <p>
+          From: {foundOpenMic?.start_time} To: {foundOpenMic?.finish_time}
+        </p>
+      )}
+      {foundOpenMic?.instrument_one !== null && (
+        <p>
+          Available Instruments: {foundOpenMic?.instrument_one}
+          {foundOpenMic?.instrument_two && `, ${foundOpenMic.instrument_two}`}
+          {foundOpenMic?.instrument_three &&
+            `, ${foundOpenMic.instrument_three}`}
+          {foundOpenMic?.instrument_four && `, ${foundOpenMic.instrument_four}`}
+          {foundOpenMic?.instrument_five && `, ${foundOpenMic.instrument_five}`}
+          {foundOpenMic?.instrument_six && `, ${foundOpenMic.instrument_six}`}
+        </p>
+      )}
+      <div>
+        {foundOpenMic !== null && (
+          <button onClick={handleUpdate}>Update</button>
+        )}
+        {foundOpenMic !== null && (
+          <button onClick={() => handleDelete(foundOpenMic?.id)}>Delete</button>
+        )}
+      </div>
+      <div>{displayUpdate && <Form />}</div>
     </>
   )
 }
