@@ -20,9 +20,9 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   devtool: 'source-map',
-  resolve: {
-    fallback: {
-      path: require.resolve('path-browserify'),
-    },
-  },
+  //   resolve: {
+  //     fallback: {
+  //       path: require.resolve('path-browserify'),
+  //     },
+  //   },
 }

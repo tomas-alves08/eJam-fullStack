@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getOpenMicsAPI } from '../api'
+import { useSelector } from 'react-redux'
 
 const OpenMics = ({ inputs }) => {
   const [displayOpenMic, setDisplayOpenMic] = useState([])
+  const openMicArr = useSelector((state) => state.openMicRed)
 
-  console.log(inputs)
+  console.log('selector: ', openMicArr)
+  console.log('inputs: ', inputs)
 
-  const handleLoad = async () => {
-    const openMicsArr = await getOpenMicsAPI()
-    setDisplayOpenMic([...openMicsArr, inputs])
-  }
+  // const handleLoad = async () => {
+  //   const openMicsArr = await getOpenMicsAPI()
+  //   setDisplayOpenMic([...openMicsArr, inputs])
+  // }
 
   useEffect(() => {
-    handleLoad()
+    // handleLoad()
   }, [inputs])
 
   return (
     <>
       <h1>Open Mics</h1>
-      {displayOpenMic?.map((openMic) => (
+      {openMicArr?.map((openMic) => (
         <>
           {openMic?.venue && (
             <Link to={`/openMics/${openMic?.id}`}>

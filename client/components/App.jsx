@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import Nav from './Nav'
 import Home from './Home'
@@ -9,8 +10,15 @@ import Register from './Register'
 import OpenMics from './OpenMics'
 import OpenMic from './OpenMic'
 
+import { fetchOpenMics } from '../actions'
+
 function App() {
   const [inputs, setInputs] = useState([])
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchOpenMics())
+  }, [])
 
   return (
     <>

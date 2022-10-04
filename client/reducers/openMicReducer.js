@@ -1,7 +1,7 @@
-import { Statement } from 'sqlite3'
 import {
   DISPLAY_OPENMICS,
-  ADD_OPENMICS,
+  DISPLAY_OPENMIC,
+  ADD_OPENMIC,
   UPDATE_OPENMICS,
   DELETE_OPENMICS,
 } from '../actions'
@@ -12,7 +12,9 @@ function openMicRed(state = [], action) {
   switch (type) {
     case DISPLAY_OPENMICS:
       return payload
-    case ADD_OPENMICS:
+    case DISPLAY_OPENMIC:
+      return payload
+    case ADD_OPENMIC:
       return [...state, payload]
     case UPDATE_OPENMICS:
       return state.map((openMic) => {

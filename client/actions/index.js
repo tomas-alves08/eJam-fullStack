@@ -2,12 +2,13 @@ import {
   getOpenMicsAPI,
   getOneOpenMicAPI,
   addOpenMicAPI,
-  deleteOpenMicAPI,
-  updateOpenMicAPI,
+  // deleteOpenMicAPI,
+  // updateOpenMicAPI,
 } from '../api'
 
 export const DISPLAY_OPENMICS = 'DISPLAY_OPENMICS'
-export const ADD_OPENMICS = 'ADD_OPENMICS'
+export const DISPLAY_OPENMIC = 'DISPLAY_OPENMIC'
+export const ADD_OPENMIC = 'ADD_OPENMIC'
 export const UPDATE_OPENMICS = 'UPDATE_OPENMICS'
 export const DELETE_OPENMICS = 'DELETE_OPENMICS'
 
@@ -18,7 +19,7 @@ export function getOpenMicsACT(openMics) {
   }
 }
 
-export function fetchOpenMic() {
+export function fetchOpenMics() {
   return async (dispatch) => {
     try {
       const respArr = await getOpenMicsAPI()
@@ -31,8 +32,38 @@ export function fetchOpenMic() {
 
 export function addOpenMicACT(openMic) {
   return {
-    type: ADD_OPENMICS,
+    type: ADD_OPENMIC,
     payload: openMic,
+  }
+}
+
+export function getOneOpenMicACT(id) {
+  return {
+    type: DISPLAY_OPENMIC,
+    payload: id,
+  }
+}
+
+export function fetchOneOpenMic(id) {
+  return async (dispatch) => {
+    try {
+      const resp = await getOneOpenMicAPI(id)
+      dispatch(getOneOpenMicACT(resp))
+    } catch (err) {
+      console.log('FETCH ONE OPEN MIC ERROR: ', err.message)
+    }
+  }
+}
+
+export function createOpenMic(openMic) {
+  return async (dispatch) => {
+    try {
+      const respId = await addOpenMicAPI(openMic)
+      const respArr = await getOneOpenMicAPI(respId)
+      dispatch(addOpenMicACT(openMic))
+    } catch (err) {
+      console.log('CREATE OPEN MIC ERROR: ', err.message)
+    }
   }
 }
 
