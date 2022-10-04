@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getOpenMicsAPI } from '../api'
-import { useSelector } from 'react-redux'
+// import { getOpenMicsAPI } from '../api'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchOpenMics } from '../actions'
 
 const OpenMics = ({ inputs }) => {
   const [displayOpenMic, setDisplayOpenMic] = useState([])
   const openMicArr = useSelector((state) => state.openMicRed)
+  const dispatch = useDispatch()
 
   console.log('selector: ', openMicArr)
   console.log('inputs: ', inputs)
 
-  // const handleLoad = async () => {
-  //   const openMicsArr = await getOpenMicsAPI()
-  //   setDisplayOpenMic([...openMicsArr, inputs])
-  // }
+  const handleLoad = async () => {
+    dispatch(fetchOpenMics())
+    // console.log(respArr)
+    // setDisplayOpenMic([...respArr])
+  }
 
   useEffect(() => {
-    // handleLoad()
-  }, [inputs])
+    handleLoad()
+  }, [])
 
   return (
     <>

@@ -2,7 +2,7 @@ import {
   getOpenMicsAPI,
   getOneOpenMicAPI,
   addOpenMicAPI,
-  // deleteOpenMicAPI,
+  deleteOpenMicAPI,
   // updateOpenMicAPI,
 } from '../api'
 
@@ -58,9 +58,11 @@ export function fetchOneOpenMic(id) {
 export function createOpenMic(openMic) {
   return async (dispatch) => {
     try {
-      const respId = await addOpenMicAPI(openMic)
-      const respArr = await getOneOpenMicAPI(respId)
-      dispatch(addOpenMicACT(openMic))
+      const resp = await addOpenMicAPI(openMic)
+      console.log('resp ID: ', resp.id)
+      const respOneOpenMic = await getOneOpenMicAPI(resp.id)
+      console.log('resp created: ', respOneOpenMic)
+      dispatch(addOpenMicACT(respOneOpenMic))
     } catch (err) {
       console.log('CREATE OPEN MIC ERROR: ', err.message)
     }
@@ -78,5 +80,17 @@ export function deleteOpenMicACT(id) {
   return {
     type: DELETE_OPENMICS,
     payload: id,
+  }
+}
+
+export function removeOpenMic(id) {
+  return async (dispatch) => {
+    try {
+      const respId = await deleteOpenMicAPI(id)
+      console.log('Action delete: ', respId)
+      dispatch(deleteOpenMicACT(respId))
+    } catch (err) {
+      console.log('REMOVE OPEN MIC ERROR: ', err.message)
+    }
   }
 }

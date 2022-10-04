@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { addOpenMicAPI } from '../api'
 import { useDispatch } from 'react-redux'
 
 import { createOpenMic } from '../actions'
