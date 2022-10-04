@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-// import { getOneOpenMicAPI, deleteOpenMicAPI } from '../api'
-import { removeOpenMic } from '../actions'
+import { showUpdate, removeOpenMic } from '../actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Form from './Form'
@@ -9,11 +8,13 @@ import Form from './Form'
 const OpenMic = ({ inputs }) => {
   const [foundOpenMic, setFoundOpenMic] = useState(null)
   const [displayOpenMic, setDisplayOpenMic] = useState(false)
-  const [displayUpdate, setDisplayUpdate] = useState(false)
+  // const [displayUpdate, setDisplayUpdate] = useState(false)
   const { openMicId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const displayUpdate = useSelector((state) => state.updateReducer)
 
+  console.log('displayUpdate: ', displayUpdate)
   const openMicArr = useSelector((state) => state.openMicRed)
 
   const handleLoadOpenMic = async () => {
@@ -26,15 +27,16 @@ const OpenMic = ({ inputs }) => {
   }
 
   const handleDelete = async (id) => {
-    // const openMicArr = await deleteOpenMicAPI(id)
-    // setDisplayFoundMic(openMicArr)
     dispatch(removeOpenMic(openMicId))
     alert('Open Deleted')
     navigate('/register')
   }
 
-  const handleUpdate = async (id) => {
-    setDisplayUpdate(true)
+  const handleUpdate = async (status, id) => {
+    console.log('Open Mic Id: ', openMicId)
+    // setDisplayUpdate(true)
+    dispatch(showUpdate(true, openMicId))
+    // navigate(`/openMics/${openMicId}`)
   }
 
   useEffect(() => {
@@ -75,7 +77,7 @@ const OpenMic = ({ inputs }) => {
             </button>
           )}
         </div>
-        <div>{displayUpdate && <Form />}</div>
+        <div>{displayUpdate.status && <Form />}</div>
       </div>
     </>
   )

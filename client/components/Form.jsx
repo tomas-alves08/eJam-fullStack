@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { createOpenMic } from '../actions'
+import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
 
 const Form = ({
   inputs,
@@ -10,7 +11,6 @@ const Form = ({
   setDisplayAddForm,
   setDisplayUpdateForm,
 }) => {
-  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     venue: '',
     location: '',
@@ -18,6 +18,11 @@ const Form = ({
     start_time: '',
     finish_time: '',
   })
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const displayUpdate = useSelector((state) => state.updateReducer)
+  const formDataId = displayUpdate.id
+  console.log('Display Update: ', displayUpdate)
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -30,14 +35,9 @@ const Form = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const { data } = req.body
     console.log('Handle Submit:', formData)
 
-    // const newOpenMic = await addOpenMicAPI(formData)
-
     dispatch(createOpenMic(formData))
-
-    // setInputs([...inputs, newOpenMic])
 
     setFormData({
       venue: '',
@@ -48,16 +48,32 @@ const Form = ({
     })
   }
 
-  const handleCancel = () => {
-    setDisplayAddForm(false)
-    setDisplayUpdateForm(false)
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+
+    dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
+    dispatch(showUpdate(false, formDataId))
+    setFormData({
+      venue: '',
+      location: '',
+      city: '',
+      start_time: '',
+      finish_time: '',
+    })
+    displayUpdate.status = false
+    navigate('/register')
   }
 
-  //   console.log(newOpenMic)
+  const handleCancel = () => {
+    dispatch((displayUpdate = { status: false, id: formDataId }))
+  }
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit} className="register-form">
+      <form
+        onSubmit={displayUpdate.status ? handleUpdate : handleSubmit}
+        className="register-form"
+      >
         <label>
           Region:
           <select>

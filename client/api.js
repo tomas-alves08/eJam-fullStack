@@ -47,11 +47,11 @@ export async function deleteOpenMicAPI(id) {
   }
 }
 
-export async function updateOpenMicAPI(updateData) {
-  console.log('Update API: ')
+export async function updateOpenMicAPI(id, updateData) {
+  console.log('Update API: ', updateData)
 
   try {
-    const updateResp = await request.put(`${url}`).send(updateData)
+    const updateResp = await request.patch(`${url}/${id}`).send(updateData)
     console.log('Update Response API: ', updateResp.body)
     return updateResp.body
   } catch (err) {

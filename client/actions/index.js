@@ -3,14 +3,17 @@ import {
   getOneOpenMicAPI,
   addOpenMicAPI,
   deleteOpenMicAPI,
-  // updateOpenMicAPI,
+  updateOpenMicAPI,
 } from '../api'
 
 export const DISPLAY_OPENMICS = 'DISPLAY_OPENMICS'
 export const DISPLAY_OPENMIC = 'DISPLAY_OPENMIC'
 export const ADD_OPENMIC = 'ADD_OPENMIC'
 export const UPDATE_OPENMICS = 'UPDATE_OPENMICS'
+export const UPDATE_DISPLAY = 'UPDATE_DISPLAY'
 export const DELETE_OPENMICS = 'DELETE_OPENMICS'
+
+// GET OPENMICS ACTIONS
 
 export function getOpenMicsACT(openMics) {
   return {
@@ -27,13 +30,6 @@ export function fetchOpenMics() {
     } catch (err) {
       console.log('FETCH OPEN MIC ERROR: ', err.message)
     }
-  }
-}
-
-export function addOpenMicACT(openMic) {
-  return {
-    type: ADD_OPENMIC,
-    payload: openMic,
   }
 }
 
@@ -55,6 +51,15 @@ export function fetchOneOpenMic(id) {
   }
 }
 
+// CREATE OPENMICS ACTIONS
+
+export function addOpenMicACT(openMic) {
+  return {
+    type: ADD_OPENMIC,
+    payload: openMic,
+  }
+}
+
 export function createOpenMic(openMic) {
   return async (dispatch) => {
     try {
@@ -69,12 +74,47 @@ export function createOpenMic(openMic) {
   }
 }
 
-export function updateOpenMicACT(id) {
+// UPDATE OPENMICS ACTIONS
+
+export function displayUpdateACT(status, id) {
   return {
-    type: UPDATE_OPENMICS,
-    payload: id,
+    type: UPDATE_DISPLAY,
+    payload: {
+      status,
+      id,
+    },
   }
 }
+
+export function showUpdate(status, id) {
+  return async (dispatch) => {
+    try {
+      dispatch(displayUpdateACT(status, id))
+    } catch (err) {
+      console.log('DISPLAY UPDATE ERROR: ', err.message)
+    }
+  }
+}
+
+export function updateOpenMicACT(openMic) {
+  return {
+    type: UPDATE_OPENMICS,
+    payload: openMic,
+  }
+}
+
+export function changeOpenMic(id, openMic) {
+  return async (dispatch) => {
+    try {
+      const resp = await updateOpenMicAPI(id, openMic)
+      dispatch(updateOpenMicACT(resp))
+    } catch (err) {
+      console.log('UPDATE OPEN MIC ERROR: ', err.message)
+    }
+  }
+}
+
+// DELETE OPENMICS ACTIONS
 
 export function deleteOpenMicACT(id) {
   return {

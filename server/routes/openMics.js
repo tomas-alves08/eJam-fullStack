@@ -60,16 +60,18 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-router.put('/', (req, res) => {
+router.patch('/:id', async (req, res) => {
+  const id = req.params.id
   const openMicUpdateData = req.body
 
-  console.log('Router Update: ', openMicUpdateData)
-
-  db.updateOneOpenMic(openMicUpdateData)
-    .then((res) => {
-      db.getAllOpenMics().then((openMicsArr) => res.json(openMicsArr))
-    })
-    .catch((err) => res.status(500).send(err.message))
+  console.log('Router Update: ', id, openMicUpdateData)
+  try {
+    const updatedData = await db.updateOneOpenMic(openMicUpdateData, id)
+    const dataArr = await db.getAllOpenMics()
+    res.json(dataArr)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
 })
 
 module.exports = router

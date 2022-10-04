@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchOpenMics } from '../actions'
 
 const OpenMics = ({ inputs }) => {
-  const [displayOpenMic, setDisplayOpenMic] = useState([])
+  // const [displayOpenMic, setDisplayOpenMic] = useState([])
   const openMicArr = useSelector((state) => state.openMicRed)
   const dispatch = useDispatch()
 
@@ -14,8 +14,6 @@ const OpenMics = ({ inputs }) => {
 
   const handleLoad = async () => {
     dispatch(fetchOpenMics())
-    // console.log(respArr)
-    // setDisplayOpenMic([...respArr])
   }
 
   useEffect(() => {

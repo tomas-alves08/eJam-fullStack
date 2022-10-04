@@ -25,8 +25,8 @@ function deleteOneOpenMic(id, db = conn) {
   return db('openMics_').del().where('id', id)
 }
 
-function updateOneOpenMic(openMic, db = conn) {
-  return db('openMics_').update(openMic).where('id', openMic.id)
+function updateOneOpenMic(openMic, id, db = conn) {
+  return db('openMics_').update(openMic).where('id', id)
 }
 
 module.exports = {
