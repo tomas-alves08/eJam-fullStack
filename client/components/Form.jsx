@@ -11,7 +11,7 @@ const Form = ({
   setDisplayAddForm,
   setDisplayUpdateForm,
 }) => {
-  const [formData, setFormData] = useState({
+  const formFields = {
     venue: '',
     location: '',
     city: '',
@@ -24,8 +24,10 @@ const Form = ({
     instrument_two: '',
     instrument_three: '',
     instrument_four: '',
-  })
+  }
+  const [formData, setFormData] = useState(formFields)
   const [frequency, setFrequency] = useState('weekly')
+  const openMicFrequency = [Weekly, Fortnightly, Monthly, One - Off]
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const displayUpdate = useSelector((state) => state.updateReducer)
@@ -47,20 +49,7 @@ const Form = ({
 
     dispatch(createOpenMic(formData))
 
-    setFormData({
-      venue: '',
-      location: '',
-      city: '',
-      frequency: '',
-      day: '',
-      date: '',
-      start_time: '',
-      finish_time: '',
-      instrument_one: '',
-      instrument_two: '',
-      instrument_three: '',
-      instrument_four: '',
-    })
+    setFormData(formFields)
   }
 
   const handleUpdate = async (e) => {
@@ -68,13 +57,7 @@ const Form = ({
 
     dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
     dispatch(showUpdate(false, formDataId))
-    setFormData({
-      venue: '',
-      location: '',
-      city: '',
-      start_time: '',
-      finish_time: '',
-    })
+    setFormData(formFields)
     displayUpdate.status = false
     navigate('/register')
   }
@@ -89,78 +72,152 @@ const Form = ({
         onSubmit={displayUpdate.status ? handleUpdate : handleSubmit}
         className="register-form"
       >
-        <label>
-          Region:
-          <select>
-            <option value="north_island">North Island</option>
-            <option value="south_island">South Island</option>
-          </select>
-        </label>
-
-        <label>
-          Venue:
+        <div>
+          <label>
+            Region:
+            <select>
+              <option value="north_island">North Island</option>
+              <option value="south_island">South Island</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Venue:
+            <input
+              type="text"
+              id="pub"
+              name="venue"
+              value={formData.venue || ''}
+              onChange={handleChange}
+              placeholder="Inser venue"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Adderss:
+            <input
+              type="text"
+              name="location"
+              value={formData.location || ''}
+              onChange={handleChange}
+              placeholder="Insert address"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            City:
+            <input
+              type="text"
+              name="city"
+              value={formData.city || ''}
+              onChange={handleChange}
+              placeholder="city"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Frequency:
+            <select>
+              <option value="weekly">Weekly</option>
+              <option value="fortnightly">Fortnightly</option>
+              <option value="monthly">Monthly</option>
+              <option value="one-off">One-Off</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Week of the Month:
+            <select>
+              <option value="first">First</option>
+              <option value="second">Second</option>
+              <option value="third">Third</option>
+              <option value="last">Last</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>
+            Day Of The Week:
+            <input
+              type="input"
+              name="day"
+              value={formData.day || ''}
+              onChange={handleChange}
+              placeholder="Insert Start Time"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            One-Off Date:
+            <input
+              type="date"
+              name="date"
+              value={formData.start_time || ''}
+              onChange={handleChange}
+              placeholder="Insert Start Time"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Start Time:
+            <input
+              type="time"
+              name="start_time"
+              value={formData.start_time || ''}
+              onChange={handleChange}
+              placeholder="Insert Start Time"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Finish Time:
+            <input
+              type="time"
+              name="finish_time"
+              value={formData.finish_time || ''}
+              onChange={handleChange}
+              placeholder="Insert End Time"
+            />
+          </label>
+        </div>
+        <div>
+          <label>Instruments:</label>
+          <br />
           <input
-            type="text"
-            id="pub"
-            name="venue"
-            value={formData.venue || ''}
-            onChange={handleChange}
-            placeholder="Inser venue"
+            type="checkbox"
+            id="acoustic-guitar"
+            name="acoustic-guitar"
+            value="acoustic-guitar"
           />
-        </label>
+          <label for="acoustic-guitar">Acoustic Guitar</label>
 
-        <label>
-          Adderss:
           <input
-            type="text"
-            name="location"
-            value={formData.location || ''}
-            onChange={handleChange}
-            placeholder="Insert address"
+            type="checkbox"
+            id="eletric-guitar"
+            name="eletric-guitar"
+            value="eletric-guitar"
           />
-        </label>
+          <label for="eletric-guitar">Eletric Guitar</label>
 
-        <label>
-          City:
-          <input
-            type="text"
-            name="city"
-            value={formData.city || ''}
-            onChange={handleChange}
-            placeholder="city"
-          />
-        </label>
+          <input type="checkbox" id="bass" name="bass" value="bass" />
+          <label for="bass">Bass</label>
 
-        <label>
-          Frequency:
-          <select>
-            <option value="weekly">Weekly</option>
-            <option value="fortnightly">Fortnightly</option>
-            <option value="monthly">Monthly</option>
-            <option value="one-off">One-Off</option>
-          </select>
-        </label>
-
-        <label>
-          Start Time:
           <input
-            type="time"
-            name="start_time"
-            value={formData.start_time || ''}
-            onChange={handleChange}
-            placeholder="Insert Start Time"
+            type="checkbox"
+            id="drum-kit"
+            name="drum-kit"
+            value="drum-kit"
           />
-        </label>
-        <label>
-          Finish Time:
-          <input
-            type="time"
-            name="finish_time"
-            value={formData.finish_time || ''}
-            onChange={handleChange}
-            placeholder="Insert End Time"
-          />
-        </label>
+          <label for="drum-kit">Drum Kit</label>
+        </div>
 
         <button>{displayAddForm ? 'Add' : 'Update'}</button>
         <button onClick={handleCancel}>Cancel</button>
