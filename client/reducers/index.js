@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux'
 
-import errorMessage from './errorMessage'
-import openMics from './openMics'
+import openMicRed from './openMicReducer'
+import addReducer from './addReducer'
+import deleteReducer from './deleteReducer'
+import updateReducer from './updateReducer'
 
 export default combineReducers({
-  errorMessage,
-  openMics,
+  openMicRed,
+  addReducer,
+  deleteReducer,
+  updateReducer,
 })

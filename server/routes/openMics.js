@@ -13,6 +13,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  const id = req.params.id
+
+  try {
+    const foundOpenMic = await db.getOneOpenMic(id)
+    console.log('BackEnd Get One OpenMic: ', foundOpenMic)
+    res.json(foundOpenMic)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+})
+
 router.post('/', async (req, res) => {
   const { venue, location, city, start_time, finish_time } = req.body
   const newOpenMic = {
@@ -25,7 +37,7 @@ router.post('/', async (req, res) => {
 
   try {
     const addedOpenMicId = await db.addOpenMic(newOpenMic)
-    // console.log('router', addedOpenMicId)
+    console.log('Post router: ', addedOpenMicId)
     const openMic = await db.getTheOpenMic(addedOpenMicId)
     // console.log('router:', openMic)
     res.json(openMic)
@@ -35,28 +47,31 @@ router.post('/', async (req, res) => {
 })
 
 router.delete('/:id', async (req, res) => {
-  const id = req.params.id
+  const id = Number(req.params.id)
 
+  console.log('Router Delete: ', id)
   try {
     const deletedOpenMic = await db.deleteOneOpenMic(id)
     console.log('Router: ', deletedOpenMic)
-    const remainderOpenMics = await db.getAllOpenMics()
-    res.json(remainderOpenMics)
+    // const remainderOpenMics = await db.getAllOpenMics()
+    res.json(deletedOpenMic)
   } catch (err) {
     res.status(500).send(err.message)
   }
 })
 
-router.put('/', (req, res) => {
+router.patch('/:id', async (req, res) => {
+  const id = req.params.id
   const openMicUpdateData = req.body
 
-  console.log('Router Update: ', openMicUpdateData)
-
-  db.updateOneOpenMic(openMicUpdateData)
-    .then((res) => {
-      db.getAllOpenMics().then((openMicsArr) => res.json(openMicsArr))
-    })
-    .catch((err) => res.status(500).send(err.message))
+  console.log('Router Update: ', id, openMicUpdateData)
+  try {
+    const updatedData = await db.updateOneOpenMic(openMicUpdateData, id)
+    const dataArr = await db.getAllOpenMics()
+    res.json(dataArr)
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
 })
 
 module.exports = router

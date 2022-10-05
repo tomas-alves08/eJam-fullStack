@@ -1,17 +1,36 @@
-import React, { useState } from 'react'
-import { addOpenMicAPI } from '../api'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-const Form = ({ inputs, setInputs }) => {
-  const dispatch = useDispatch()
+import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
 
+const Form = ({
+  inputs,
+  setInputs,
+  displayAddForm,
+  setDisplayAddForm,
+  setDisplayUpdateForm,
+}) => {
   const [formData, setFormData] = useState({
     venue: '',
-    address: '',
+    location: '',
     city: '',
+    frequency: '',
+    day: '',
+    date: '',
     start_time: '',
     finish_time: '',
+    instrument_one: '',
+    instrument_two: '',
+    instrument_three: '',
+    instrument_four: '',
   })
+  const [frequency, setFrequency] = useState('weekly')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const displayUpdate = useSelector((state) => state.updateReducer)
+  const formDataId = displayUpdate.id
+  console.log('Display Update: ', displayUpdate)
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -24,28 +43,60 @@ const Form = ({ inputs, setInputs }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // const { data } = req.body
     console.log('Handle Submit:', formData)
 
-    const newOpenMic = await addOpenMicAPI(formData)
-    dispatch(newOpenMic)
-
-    setInputs([...inputs, newOpenMic])
+    dispatch(createOpenMic(formData))
 
     setFormData({
       venue: '',
-      address: '',
+      location: '',
+      city: '',
+      frequency: '',
+      day: '',
+      date: '',
+      start_time: '',
+      finish_time: '',
+      instrument_one: '',
+      instrument_two: '',
+      instrument_three: '',
+      instrument_four: '',
+    })
+  }
+
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+
+    dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
+    dispatch(showUpdate(false, formDataId))
+    setFormData({
+      venue: '',
+      location: '',
       city: '',
       start_time: '',
       finish_time: '',
     })
+    displayUpdate.status = false
+    navigate('/register')
   }
 
-  //   console.log(newOpenMic)
+  const handleCancel = () => {
+    dispatch((displayUpdate = { status: false, id: formDataId }))
+  }
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit} className="register-form">
+      <form
+        onSubmit={displayUpdate.status ? handleUpdate : handleSubmit}
+        className="register-form"
+      >
+        <label>
+          Region:
+          <select>
+            <option value="north_island">North Island</option>
+            <option value="south_island">South Island</option>
+          </select>
+        </label>
+
         <label>
           Venue:
           <input
@@ -79,28 +130,40 @@ const Form = ({ inputs, setInputs }) => {
             placeholder="city"
           />
         </label>
+
+        <label>
+          Frequency:
+          <select>
+            <option value="weekly">Weekly</option>
+            <option value="fortnightly">Fortnightly</option>
+            <option value="monthly">Monthly</option>
+            <option value="one-off">One-Off</option>
+          </select>
+        </label>
+
         <label>
           Start Time:
           <input
-            type="text"
+            type="time"
             name="start_time"
             value={formData.start_time || ''}
             onChange={handleChange}
-            placeholder="Insert day"
+            placeholder="Insert Start Time"
           />
         </label>
         <label>
           Finish Time:
           <input
-            type="text"
+            type="time"
             name="finish_time"
             value={formData.finish_time || ''}
             onChange={handleChange}
-            placeholder="Insert Time"
+            placeholder="Insert End Time"
           />
         </label>
 
-        <button>Submit</button>
+        <button>{displayAddForm ? 'Add' : 'Update'}</button>
+        <button onClick={handleCancel}>Cancel</button>
       </form>
     </div>
   )

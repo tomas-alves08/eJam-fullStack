@@ -1,50 +1,84 @@
 import React, { useState, useEffect } from 'react'
-import { getOpenMicsAPI, deleteOpenMicAPI } from '../api'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { fetchOpenMics } from '../actions'
-import { useDispatch } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
+import { showUpdate, removeOpenMic } from '../actions'
+import { useDispatch, useSelector } from 'react-redux'
 
-const OpenMic = () => {
-  const [displayOpenMic, setDisplayOpenMic] = useState([])
-  const openMicsArr = useSelector((redux) => redux.openMics)
+import Form from './Form'
+
+const OpenMic = ({ inputs }) => {
+  const [foundOpenMic, setFoundOpenMic] = useState(null)
+  const [displayOpenMic, setDisplayOpenMic] = useState(false)
+  // const [displayUpdate, setDisplayUpdate] = useState(false)
+  const { openMicId } = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const displayUpdate = useSelector((state) => state.updateReducer)
 
-  console.log('OpenMic Component: ', openMicsArr[0])
+  console.log('displayUpdate: ', displayUpdate)
+  const openMicArr = useSelector((state) => state.openMicRed)
 
-  const handleLoad = () => {}
+  const handleLoadOpenMic = async () => {
+    const selectedOpenMic = openMicArr.find(
+      (openMic) => openMic.id == openMicId
+    )
+    setFoundOpenMic(selectedOpenMic)
 
-  const handleDelete = async (id) => {
-    const openMicArr = await deleteOpenMicAPI(id)
-    // setDisplayOpenMic(openMicArr)
+    if (selectedOpenMic !== '') setDisplayOpenMic(true)
   }
 
-  // const handleUpdate = async()
+  const handleDelete = async (id) => {
+    dispatch(removeOpenMic(openMicId))
+    alert('Open Deleted')
+    navigate('/register')
+  }
+
+  const handleUpdate = async (status, id) => {
+    console.log('Open Mic Id: ', openMicId)
+    // setDisplayUpdate(true)
+    dispatch(showUpdate(true, openMicId))
+    // navigate(`/openMics/${openMicId}`)
+  }
 
   useEffect(() => {
-    dispatch(fetchOpenMics())
-    // setDisplayOpenMic(openMicsArr)
-    console.log('OpenMic: ', displayOpenMic)
-  }, [])
+    handleLoadOpenMic()
+  }, [openMicArr])
 
   return (
     <>
-      <h1>Open Mics</h1>
-      <button onClick={handleLoad}>Get Open Mics</button>
-      {openMicsArr?.map((openMic) => (
-        <>
-          <h2>{openMic?.venue}</h2>
-          <p>Address: {openMic?.location}</p>
-          <p>City: {openMic?.city}</p>
+      <div className="display-container">
+        {foundOpenMic?.venue && <h2>{foundOpenMic?.venue}</h2>}
+        {foundOpenMic?.city && <h3>City: {foundOpenMic?.city}</h3>}
+        {foundOpenMic?.day && <h3>Day: {foundOpenMic?.day}</h3>}
+        {foundOpenMic?.start_time && (
           <p>
-            From {openMic?.start_time} to {openMic?.finish_time}
+            From: {foundOpenMic?.start_time} To: {foundOpenMic?.finish_time}
           </p>
-          <button onClick={() => handleDelete(openMic?.id)}>Delete</button>
-          <Link to="/update">
-            <button onClick={() => handleUpdate(openMic?.id)}>Update</button>
-          </Link>
-        </>
-      ))}
+        )}
+        {foundOpenMic?.instrument_one !== null && (
+          <p>
+            {`Available Instruments: ${foundOpenMic?.instrument_one}`}
+            {foundOpenMic?.instrument_two && `, ${foundOpenMic.instrument_two}`}
+            {foundOpenMic?.instrument_three &&
+              `, ${foundOpenMic.instrument_three}`}
+            {foundOpenMic?.instrument_four &&
+              `, ${foundOpenMic.instrument_four}`}
+            {foundOpenMic?.instrument_five &&
+              `, ${foundOpenMic.instrument_five}`}
+            {foundOpenMic?.instrument_six && `, ${foundOpenMic.instrument_six}`}
+          </p>
+        )}
+        <div>
+          {foundOpenMic !== null && (
+            <button onClick={handleUpdate}>Update</button>
+          )}
+          {foundOpenMic !== null && (
+            <button onClick={() => handleDelete(foundOpenMic?.id)}>
+              Delete
+            </button>
+          )}
+        </div>
+        <div>{displayUpdate.status && <Form />}</div>
+      </div>
     </>
   )
 }
