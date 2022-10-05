@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 
   try {
     const addedOpenMicId = await db.addOpenMic(newOpenMic)
-    // console.log('router', addedOpenMicId)
+    console.log('Post router: ', addedOpenMicId)
     const openMic = await db.getTheOpenMic(addedOpenMicId)
     // console.log('router:', openMic)
     res.json(openMic)

@@ -1,32 +1,34 @@
-// const { useInsertionEffect } = require('react')
+// const config = require('./knexfile').development
+// const conn = require('knex')(config)
 
-const config = require('./knexfile').development
-// eslint-disable-next-line no-unused-vars
-const conn = require('knex')(config)
+const knex = require('knex')
+const config = require('./knexfile')
+const env = process.env.NODE_ENV || 'development'
+const conn = knex(config[env])
 
 function getOneOpenMic(id, db = conn) {
-  return db('openMics_').select().where('id', id).first()
+  return db('openMics').select().where('id', id).first()
 }
 
 function getAllOpenMics(db = conn) {
-  return db('openMics_').select()
+  return db('openMics').select()
 }
 
 function addOpenMic(newOpenMic, db = conn) {
-  return db('openMics_').insert(newOpenMic)
+  return db('openMics').insert(newOpenMic)
 }
 
 function getTheOpenMic(id, db = conn) {
-  return db('openMics_').select().where('id', id).first()
+  return db('openMics').select().where('id', id).first()
 }
 
 function deleteOneOpenMic(id, db = conn) {
   console.log('DB: ', id, typeof id)
-  return db('openMics_').del().where('id', id)
+  return db('openMics').del().where('id', id)
 }
 
 function updateOneOpenMic(openMic, id, db = conn) {
-  return db('openMics_').update(openMic).where('id', id)
+  return db('openMics').update(openMic).where('id', id)
 }
 
 module.exports = {

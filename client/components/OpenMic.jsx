@@ -46,10 +46,10 @@ const OpenMic = ({ inputs }) => {
   return (
     <>
       <div className="display-container">
-        {displayOpenMic && <h2>{foundOpenMic?.venue}</h2>}
-        {displayOpenMic && <h3>City: {foundOpenMic?.city}</h3>}
-        {displayOpenMic && <h3>Day: {foundOpenMic?.day}</h3>}
-        {displayOpenMic && (
+        {foundOpenMic?.venue && <h2>{foundOpenMic?.venue}</h2>}
+        {foundOpenMic?.city && <h3>City: {foundOpenMic?.city}</h3>}
+        {foundOpenMic?.day && <h3>Day: {foundOpenMic?.day}</h3>}
+        {foundOpenMic?.start_time && (
           <p>
             From: {foundOpenMic?.start_time} To: {foundOpenMic?.finish_time}
           </p>

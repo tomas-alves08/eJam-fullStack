@@ -15,9 +15,17 @@ const Form = ({
     venue: '',
     location: '',
     city: '',
+    frequency: '',
+    day: '',
+    date: '',
     start_time: '',
     finish_time: '',
+    instrument_one: '',
+    instrument_two: '',
+    instrument_three: '',
+    instrument_four: '',
   })
+  const [frequency, setFrequency] = useState('weekly')
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const displayUpdate = useSelector((state) => state.updateReducer)
@@ -43,8 +51,15 @@ const Form = ({
       venue: '',
       location: '',
       city: '',
+      frequency: '',
+      day: '',
+      date: '',
       start_time: '',
       finish_time: '',
+      instrument_one: '',
+      instrument_two: '',
+      instrument_three: '',
+      instrument_four: '',
     })
   }
 
@@ -115,6 +130,17 @@ const Form = ({
             placeholder="city"
           />
         </label>
+
+        <label>
+          Frequency:
+          <select>
+            <option value="weekly">Weekly</option>
+            <option value="fortnightly">Fortnightly</option>
+            <option value="monthly">Monthly</option>
+            <option value="one-off">One-Off</option>
+          </select>
+        </label>
+
         <label>
           Start Time:
           <input

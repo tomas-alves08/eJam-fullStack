@@ -5,10 +5,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchOpenMics } from '../actions'
 
 const OpenMics = ({ inputs }) => {
-  // const [displayOpenMic, setDisplayOpenMic] = useState([])
+  // const [loadOpenMic, setLoadOpenMic] = useState([])
   const openMicArr = useSelector((state) => state.openMicRed)
   const dispatch = useDispatch()
-
+  const newOpenMic = useSelector((state) => state.addReducer)
+  console.log(newOpenMic)
+  // setLoadOpenMic(newOpenMic)
   console.log('selector: ', openMicArr)
   console.log('inputs: ', inputs)
 
@@ -18,7 +20,7 @@ const OpenMics = ({ inputs }) => {
 
   useEffect(() => {
     handleLoad()
-  }, [])
+  }, [newOpenMic])
 
   return (
     <>
