@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import citiesData from '../../nz.json'
 
 import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
 
@@ -26,7 +27,7 @@ const Form = ({
     instrument_four: '',
   }
   const [formData, setFormData] = useState(formFields)
-  const [frequency, setFrequency] = useState('weekly')
+  // const [frequency, setFrequency] = useState('weekly')
 
   const frequencyArr = [
     'Select the Frequency of the Event',
@@ -72,6 +73,10 @@ const Form = ({
   const displayUpdate = useSelector((state) => state.updateReducer)
   const formDataId = displayUpdate.id
   console.log('Display Update: ', displayUpdate)
+
+  // Cities in NZ
+  const citiesNorthIsland = citiesData.filter((city) => city.lat >= -41.2889)
+  const citiesSouthIsland = citiesData.filter((city) => city.lat < -41.2889)
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -131,6 +136,31 @@ const Form = ({
             </td>
           </tr>
 
+          {formData.region && (
+            <tr>
+              <td>
+                <label htmlFor="city">City:</label>
+              </td>
+              <td>
+                <select
+                  id="city"
+                  name="city"
+                  value={formData.city || ''}
+                  onChange={handleChange}
+                >
+                  {formData.region === 'North Island' &&
+                    citiesNorthIsland.map((city) => (
+                      <option value={`${city.city}`}>{`${city.city}`}</option>
+                    ))}
+                  {formData.region === 'South Island' &&
+                    citiesSouthIsland.map((city) => (
+                      <option value={`${city.city}`}>{`${city.city}`}</option>
+                    ))}
+                </select>
+              </td>
+            </tr>
+          )}
+
           <tr>
             <td>
               <label htmlFor="pub">Venue:</label>
@@ -159,22 +189,6 @@ const Form = ({
                 value={formData.location || ''}
                 onChange={handleChange}
                 placeholder="Insert address"
-              />
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <label htmlFor="city">City:</label>
-            </td>
-            <td>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                value={formData.city || ''}
-                onChange={handleChange}
-                placeholder="Insert your city"
               />
             </td>
           </tr>
