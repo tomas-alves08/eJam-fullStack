@@ -62,6 +62,7 @@ export function addOpenMicACT(openMic) {
 
 export function createOpenMic(openMic) {
   return async (dispatch) => {
+    console.log('Create OpenMic: ', openMic)
     try {
       const resp = await addOpenMicAPI(openMic)
       console.log('resp ID: ', resp.id)

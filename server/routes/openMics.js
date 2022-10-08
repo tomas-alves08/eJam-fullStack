@@ -26,17 +26,10 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { venue, location, city, start_time, finish_time } = req.body
-  const newOpenMic = {
-    venue,
-    location,
-    city,
-    start_time,
-    finish_time,
-  }
+  console.log('Post req.body: ', req.body)
 
   try {
-    const addedOpenMicId = await db.addOpenMic(newOpenMic)
+    const addedOpenMicId = await db.addOpenMic(req.body)
     console.log('Post router: ', addedOpenMicId)
     const openMic = await db.getTheOpenMic(addedOpenMicId)
     // console.log('router:', openMic)

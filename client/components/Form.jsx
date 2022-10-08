@@ -27,7 +27,46 @@ const Form = ({
   }
   const [formData, setFormData] = useState(formFields)
   const [frequency, setFrequency] = useState('weekly')
-  const openMicFrequency = [Weekly, Fortnightly, Monthly, One - Off]
+
+  const frequencyArr = [
+    'Select the Frequency of the Event',
+    'Weekly',
+    'Fortnightly',
+    'Monthly',
+    'One-Off',
+  ]
+  const weekdayArr = [
+    'Select Day of the Week',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ]
+  const weekOfTheMonthArr = [
+    'Select the week of the month',
+    'First',
+    'Second',
+    'Third',
+    'Last',
+  ]
+  const instrumentsArr = [
+    'Select Instrument',
+    'Acoustic Guitar',
+    'Eletric Guitar',
+    'Bass',
+    'Drum Kit',
+    'Cajon',
+    'Congas',
+    'Bongos',
+    'Shakers',
+    'Saxophone',
+    'Trumpet',
+    'Flute',
+  ]
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const displayUpdate = useSelector((state) => state.updateReducer)
@@ -37,6 +76,7 @@ const Form = ({
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
+    console.log(e.target.value)
     setFormData({
       ...formData,
       [name]: value,
@@ -62,9 +102,9 @@ const Form = ({
     navigate('/register')
   }
 
-  const handleCancel = () => {
-    dispatch((displayUpdate = { status: false, id: formDataId }))
-  }
+  // const handleCancel = () => {
+  //   dispatch((displayUpdate = { status: false, id: formDataId }))
+  // }
 
   return (
     <div className="form-container">
@@ -72,155 +112,289 @@ const Form = ({
         onSubmit={displayUpdate.status ? handleUpdate : handleSubmit}
         className="register-form"
       >
-        <div>
-          <label>
-            Region:
-            <select>
-              <option value="north_island">North Island</option>
-              <option value="south_island">South Island</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Venue:
-            <input
-              type="text"
-              id="pub"
-              name="venue"
-              value={formData.venue || ''}
-              onChange={handleChange}
-              placeholder="Inser venue"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Adderss:
-            <input
-              type="text"
-              name="location"
-              value={formData.location || ''}
-              onChange={handleChange}
-              placeholder="Insert address"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            City:
-            <input
-              type="text"
-              name="city"
-              value={formData.city || ''}
-              onChange={handleChange}
-              placeholder="city"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Frequency:
-            <select>
-              <option value="weekly">Weekly</option>
-              <option value="fortnightly">Fortnightly</option>
-              <option value="monthly">Monthly</option>
-              <option value="one-off">One-Off</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Week of the Month:
-            <select>
-              <option value="first">First</option>
-              <option value="second">Second</option>
-              <option value="third">Third</option>
-              <option value="last">Last</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Day Of The Week:
-            <input
-              type="input"
-              name="day"
-              value={formData.day || ''}
-              onChange={handleChange}
-              placeholder="Insert Start Time"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            One-Off Date:
-            <input
-              type="date"
-              name="date"
-              value={formData.start_time || ''}
-              onChange={handleChange}
-              placeholder="Insert Start Time"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Start Time:
-            <input
-              type="time"
-              name="start_time"
-              value={formData.start_time || ''}
-              onChange={handleChange}
-              placeholder="Insert Start Time"
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Finish Time:
-            <input
-              type="time"
-              name="finish_time"
-              value={formData.finish_time || ''}
-              onChange={handleChange}
-              placeholder="Insert End Time"
-            />
-          </label>
-        </div>
-        <div>
-          <label>Instruments:</label>
-          <br />
-          <input
-            type="checkbox"
-            id="acoustic-guitar"
-            name="acoustic-guitar"
-            value="acoustic-guitar"
-          />
-          <label for="acoustic-guitar">Acoustic Guitar</label>
+        <table>
+          <tr>
+            <td className="form-lable">
+              <label htmlFor="region">Region:</label>
+            </td>
+            <td className="form-data">
+              <select
+                id="region"
+                name="region"
+                value={formData.region || ''}
+                onChange={handleChange}
+              >
+                <option value="Select">Select your Region</option>
+                <option value="North Island">North Island</option>
+                <option value="South Island">South Island</option>
+              </select>
+            </td>
+          </tr>
 
-          <input
-            type="checkbox"
-            id="eletric-guitar"
-            name="eletric-guitar"
-            value="eletric-guitar"
-          />
-          <label for="eletric-guitar">Eletric Guitar</label>
+          <tr>
+            <td>
+              <label htmlFor="pub">Venue:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                id="pub"
+                name="venue"
+                value={formData.venue || ''}
+                onChange={handleChange}
+                placeholder="Inser venue"
+              />
+            </td>
+          </tr>
 
-          <input type="checkbox" id="bass" name="bass" value="bass" />
-          <label for="bass">Bass</label>
+          <tr>
+            <td>
+              <label htmlFor="location">Adderss:</label>
+            </td>
+            <td>
+              <input
+                id="location"
+                type="text"
+                name="location"
+                value={formData.location || ''}
+                onChange={handleChange}
+                placeholder="Insert address"
+              />
+            </td>
+          </tr>
 
-          <input
-            type="checkbox"
-            id="drum-kit"
-            name="drum-kit"
-            value="drum-kit"
-          />
-          <label for="drum-kit">Drum Kit</label>
-        </div>
+          <tr>
+            <td>
+              <label htmlFor="city">City:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={formData.city || ''}
+                onChange={handleChange}
+                placeholder="Insert your city"
+              />
+            </td>
+          </tr>
 
-        <button>{displayAddForm ? 'Add' : 'Update'}</button>
-        <button onClick={handleCancel}>Cancel</button>
+          <tr>
+            <td>
+              <label htmlFor="frequency">Frequency:</label>
+            </td>
+            <td>
+              <select
+                id="frequency"
+                name="frequency"
+                value={formData.frequency || ''}
+                onChange={handleChange}
+              >
+                {frequencyArr.map((el) => (
+                  <option value={`${el}`}>{`${el}`}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+
+          {formData.frequency === 'Monthly' && (
+            <tr>
+              <td>
+                <label htmlFor="week-month">Week of the Month:</label>
+              </td>
+              <td>
+                <select id="week-month">
+                  {weekOfTheMonthArr.map((el) => (
+                    <option value={`${el}`}>{`${el}`}</option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+          )}
+
+          {formData.frequency !== 'One-Off' && formData.frequency !== '' && (
+            <tr>
+              <td>
+                <label htmlFor="day">Day Of The Week:</label>
+              </td>
+              <td>
+                <select
+                  id="day"
+                  name="day"
+                  value={formData.day || ''}
+                  onChange={handleChange}
+                >
+                  {weekdayArr.map((el) => (
+                    <option value={`${el}`}>{`${el}`}</option>
+                  ))}
+                </select>
+              </td>
+            </tr>
+          )}
+
+          {formData.frequency === 'One-Off' && (
+            <tr>
+              <td>
+                <label htmlFor="date">One-Off Date:</label>
+              </td>
+              <td>
+                <input
+                  type="date"
+                  id="date"
+                  name="date"
+                  value={formData.start_time || ''}
+                  onChange={handleChange}
+                  placeholder="Insert Start Time"
+                />
+              </td>
+            </tr>
+          )}
+
+          <tr>
+            <td>
+              <label htmlFor="start_time">Start Time:</label>
+            </td>
+            <td>
+              <input
+                type="time"
+                id="start_time"
+                name="start_time"
+                value={formData.start_time || ''}
+                onChange={handleChange}
+                placeholder="Insert Start Time"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label htmlFor="finish_time">Finish Time:</label>
+            </td>
+            <td>
+              <input
+                type="time"
+                id="finish_time"
+                name="finish_time"
+                value={formData.finish_time || ''}
+                onChange={handleChange}
+                placeholder="Insert End Time"
+              />
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label>Instruments:</label>
+            </td>
+            <td>
+              <>
+                <div>
+                  <label>1.</label>
+                  <select
+                    id="instrument_one"
+                    name="instrument_one"
+                    value={formData.instrument_one || ''}
+                    onChange={handleChange}
+                  >
+                    {instrumentsArr.map((el) => (
+                      <option value={`${el}`}>{`${el}`}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {formData.instrument_one && (
+                  <div>
+                    <label>2.</label>
+                    <select
+                      id="instrument_two"
+                      name="instrument_two"
+                      value={formData.instrument_two || ''}
+                      onChange={handleChange}
+                    >
+                      {instrumentsArr.map((el) => (
+                        <option value={`${el}`}>{`${el}`}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {formData.instrument_two && (
+                  <div>
+                    <label>3.</label>
+                    <select
+                      id="instrument_three"
+                      name="instrument_three"
+                      value={formData.instrument_three || ''}
+                      onChange={handleChange}
+                    >
+                      {instrumentsArr.map((el) => (
+                        <option value={`${el}`}>{`${el}`}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {formData.instrument_three && (
+                  <div>
+                    <label>4.</label>
+                    <select
+                      id="instrument_four"
+                      name="instrument_four"
+                      value={formData.instrument_four || ''}
+                      onChange={handleChange}
+                    >
+                      {instrumentsArr.map((el) => (
+                        <option value={`${el}`}>{`${el}`}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {formData.instrument_four && (
+                  <div>
+                    <label>5.</label>
+                    <select
+                      id="instrument_five"
+                      name="instrument_five"
+                      value={formData.instrument_five || ''}
+                      onChange={handleChange}
+                    >
+                      {instrumentsArr.map((el) => (
+                        <option value={`${el}`}>{`${el}`}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
+                {formData.instrument_five && (
+                  <div>
+                    <label>6.</label>
+                    <select
+                      id="instrument_six"
+                      name="instrument_six"
+                      value={formData.instrument_six || ''}
+                      onChange={handleChange}
+                    >
+                      {instrumentsArr.map((el) => (
+                        <option value={`${el}`}>{`${el}`}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={2}>
+              <div className="form-buttons">
+                <button class="button" role="button">
+                  {displayAddForm ? 'Add' : 'Update'}
+                </button>
+                {/* <button onClick={handleCancel}>Cancel</button> */}
+              </div>
+            </td>
+          </tr>
+        </table>
       </form>
     </div>
   )

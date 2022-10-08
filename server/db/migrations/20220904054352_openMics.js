@@ -1,6 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('openMics', (table) => {
     table.increments('id')
+    table.string('region')
     table.string('venue')
     table.string('city')
     table.string('location')
