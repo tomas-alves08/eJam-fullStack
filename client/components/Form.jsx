@@ -29,6 +29,7 @@ const Form = ({ displayAddForm }) => {
   // Update Redux Store State
   let displayUpdate = useSelector((state) => state.updateReducer)
   const formDataId = displayUpdate.id
+  const status = displayUpdate.status
   console.log('Display Update: ', displayUpdate)
 
   // OpenMics Redux Store State
@@ -137,7 +138,11 @@ const Form = ({ displayAddForm }) => {
               <select
                 id="region"
                 name="region"
-                defaultValue={selectedOpenMic.region || formData.region || ''}
+                defaultValue={
+                  displayUpdate?.status
+                    ? selectedOpenMic.region || formData.region || ''
+                    : formData.region || ''
+                }
                 onChange={handleChange}
               >
                 <option value="Select">Select your Region</option>
@@ -156,7 +161,11 @@ const Form = ({ displayAddForm }) => {
                 <select
                   id="city"
                   name="city"
-                  defaultValue={selectedOpenMic.city || formData.city || ''}
+                  defaultValue={
+                    displayUpdate?.status
+                      ? selectedOpenMic.city || formData.city || ''
+                      : formData.city || ''
+                  }
                   onChange={handleChange}
                 >
                   {formData.region === 'North Island' &&
@@ -181,7 +190,11 @@ const Form = ({ displayAddForm }) => {
                 type="text"
                 id="pub"
                 name="venue"
-                defaultValue={selectedOpenMic.venue || formData.venue || ''}
+                defaultValue={
+                  displayUpdate?.status
+                    ? selectedOpenMic.venue || formData.venue || ''
+                    : formData.venue || ''
+                }
                 onChange={handleChange}
                 placeholder="Inser venue"
               />
@@ -198,7 +211,9 @@ const Form = ({ displayAddForm }) => {
                 type="text"
                 name="location"
                 defaultValue={
-                  selectedOpenMic.location || formData.location || ''
+                  displayUpdate?.status
+                    ? selectedOpenMic.location || formData.location || ''
+                    : formData.location || ''
                 }
                 onChange={handleChange}
                 placeholder="Insert address"
@@ -215,7 +230,9 @@ const Form = ({ displayAddForm }) => {
                 id="frequency"
                 name="frequency"
                 defaultValue={
-                  selectedOpenMic.frequency || formData.frequency || ''
+                  displayUpdate?.status
+                    ? selectedOpenMic.frequency || formData.frequency || ''
+                    : formData.frequency || ''
                 }
                 onChange={handleChange}
               >
@@ -250,7 +267,11 @@ const Form = ({ displayAddForm }) => {
                 <select
                   id="day"
                   name="day"
-                  defaultValue={selectedOpenMic.day || formData.day || ''}
+                  defaultValue={
+                    displayUpdate?.status
+                      ? selectedOpenMic.day || formData.day || ''
+                      : formData.day || ''
+                  }
                   onChange={handleChange}
                 >
                   {weekdayArr.map((el) => (
@@ -271,7 +292,11 @@ const Form = ({ displayAddForm }) => {
                   type="date"
                   id="date"
                   name="date"
-                  defaultValue={selectedOpenMic.date || formData.date || ''}
+                  defaultValue={
+                    displayUpdate?.status
+                      ? selectedOpenMic.date || formData.date || ''
+                      : formData.date || ''
+                  }
                   onChange={handleChange}
                   placeholder="Insert Start Time"
                 />
@@ -289,7 +314,9 @@ const Form = ({ displayAddForm }) => {
                 id="start_time"
                 name="start_time"
                 defaultValue={
-                  selectedOpenMic.start_time || formData.start_time || ''
+                  displayUpdate?.status
+                    ? selectedOpenMic.start_time || formData.start_time || ''
+                    : formData.start_time || ''
                 }
                 onChange={handleChange}
                 placeholder="Insert Start Time"
@@ -307,7 +334,9 @@ const Form = ({ displayAddForm }) => {
                 id="finish_time"
                 name="finish_time"
                 defaultValue={
-                  selectedOpenMic.finish_time || formData.finish_time || ''
+                  displayUpdate?.status
+                    ? selectedOpenMic.finish_time || formData.finish_time || ''
+                    : formData.finish_time || ''
                 }
                 onChange={handleChange}
                 placeholder="Insert End Time"
@@ -327,9 +356,11 @@ const Form = ({ displayAddForm }) => {
                     id="instrument_one"
                     name="instrument_one"
                     defaultValue={
-                      selectedOpenMic.instrument_one ||
-                      formData.instrument_one ||
-                      ''
+                      displayUpdate?.status
+                        ? selectedOpenMic.instrument_one ||
+                          formData.instrument_one ||
+                          ''
+                        : formData.instrument_one || ''
                     }
                     onChange={handleChange}
                   >
@@ -346,9 +377,11 @@ const Form = ({ displayAddForm }) => {
                       id="instrument_two"
                       name="instrument_two"
                       defaultValue={
-                        selectedOpenMic.instrument_two ||
-                        formData.instrument_two ||
-                        ''
+                        displayUpdate?.status
+                          ? selectedOpenMic.instrument_two ||
+                            formData.instrument_two ||
+                            ''
+                          : formData.instrument_two || ''
                       }
                       onChange={handleChange}
                     >
@@ -366,9 +399,11 @@ const Form = ({ displayAddForm }) => {
                       id="instrument_three"
                       name="instrument_three"
                       defaultValue={
-                        selectedOpenMic.instrument_three ||
-                        formData.instrument_three ||
-                        ''
+                        displayUpdate?.status
+                          ? selectedOpenMic.instrument_three ||
+                            formData.instrument_three ||
+                            ''
+                          : formData.instrument_three || ''
                       }
                       onChange={handleChange}
                     >
@@ -386,9 +421,11 @@ const Form = ({ displayAddForm }) => {
                       id="instrument_four"
                       name="instrument_four"
                       defaultValue={
-                        selectedOpenMic.instrument_four ||
-                        formData.instrument_four ||
-                        ''
+                        displayUpdate?.status
+                          ? selectedOpenMic.instrument_four ||
+                            formData.instrument_four ||
+                            ''
+                          : formData.instrument_four || ''
                       }
                       onChange={handleChange}
                     >
@@ -406,9 +443,11 @@ const Form = ({ displayAddForm }) => {
                       id="instrument_five"
                       name="instrument_five"
                       defaultValue={
-                        selectedOpenMic.instrument_five ||
-                        formData.instrument_five ||
-                        ''
+                        displayUpdate?.status
+                          ? selectedOpenMic.instrument_five ||
+                            formData.instrument_five ||
+                            ''
+                          : formData.instrument_five || ''
                       }
                       onChange={handleChange}
                     >
@@ -426,9 +465,11 @@ const Form = ({ displayAddForm }) => {
                       id="instrument_six"
                       name="instrument_six"
                       defaultValue={
-                        selectedOpenMic.instrument_six ||
-                        formData.instrument_six ||
-                        ''
+                        displayUpdate?.status
+                          ? selectedOpenMic.instrument_six ||
+                            formData.instrument_six ||
+                            ''
+                          : formData.instrument_six || ''
                       }
                       onChange={handleChange}
                     >

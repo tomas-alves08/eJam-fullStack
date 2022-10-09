@@ -107,6 +107,7 @@ export function updateOpenMicACT(openMic) {
 export function changeOpenMic(id, openMic) {
   return async (dispatch) => {
     try {
+      console.log(openMic)
       const resp = await updateOpenMicAPI(id, openMic)
       dispatch(updateOpenMicACT(resp))
     } catch (err) {
