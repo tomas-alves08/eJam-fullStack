@@ -5,14 +5,8 @@ import citiesData from '../../nz.json'
 
 import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
 
-const Form = ({
-  inputs,
-  setInputs,
-  displayAddForm,
-  setDisplayAddForm,
-  setDisplayUpdateForm,
-}) => {
-  const formFields = {
+const Form = ({ displayAddForm }) => {
+  let formFields = {
     venue: '',
     location: '',
     city: '',
@@ -25,10 +19,29 @@ const Form = ({
     instrument_two: '',
     instrument_three: '',
     instrument_four: '',
+    instrument_five: '',
+    instrument_six: '',
   }
-  const [formData, setFormData] = useState(formFields)
-  // const [frequency, setFrequency] = useState('weekly')
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  // Update Redux Store State
+  let displayUpdate = useSelector((state) => state.updateReducer)
+  const formDataId = displayUpdate.id
+  console.log('Display Update: ', displayUpdate)
+
+  // OpenMics Redux Store State
+  const openMicArr = useSelector((state) => state.openMicRed)
+  const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
+
+  if (displayUpdate.status === true) {
+    formFields = { ...selectedOpenMic }
+  }
+
+  const [formData, setFormData] = useState(formFields)
+
+  // Dropdown Arrays
   const frequencyArr = [
     'Select the Frequency of the Event',
     'Weekly',
@@ -68,16 +81,14 @@ const Form = ({
     'Flute',
   ]
 
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const displayUpdate = useSelector((state) => state.updateReducer)
-  const formDataId = displayUpdate.id
-  console.log('Display Update: ', displayUpdate)
+  console.log('status: ', displayUpdate.status)
+  console.log('Form Fields: ', formFields)
 
   // Cities in NZ
   const citiesNorthIsland = citiesData.filter((city) => city.lat >= -41.2889)
   const citiesSouthIsland = citiesData.filter((city) => city.lat < -41.2889)
 
+  // Functions
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
@@ -107,9 +118,9 @@ const Form = ({
     navigate('/register')
   }
 
-  // const handleCancel = () => {
-  //   dispatch((displayUpdate = { status: false, id: formDataId }))
-  // }
+  const handleCancel = () => {
+    dispatch(showUpdate(false, formDataId))
+  }
 
   return (
     <div className="form-container">
@@ -126,7 +137,7 @@ const Form = ({
               <select
                 id="region"
                 name="region"
-                value={formData.region || ''}
+                defaultValue={selectedOpenMic.region || formData.region || ''}
                 onChange={handleChange}
               >
                 <option value="Select">Select your Region</option>
@@ -145,7 +156,7 @@ const Form = ({
                 <select
                   id="city"
                   name="city"
-                  value={formData.city || ''}
+                  defaultValue={selectedOpenMic.city || formData.city || ''}
                   onChange={handleChange}
                 >
                   {formData.region === 'North Island' &&
@@ -170,7 +181,7 @@ const Form = ({
                 type="text"
                 id="pub"
                 name="venue"
-                value={formData.venue || ''}
+                defaultValue={selectedOpenMic.venue || formData.venue || ''}
                 onChange={handleChange}
                 placeholder="Inser venue"
               />
@@ -186,7 +197,9 @@ const Form = ({
                 id="location"
                 type="text"
                 name="location"
-                value={formData.location || ''}
+                defaultValue={
+                  selectedOpenMic.location || formData.location || ''
+                }
                 onChange={handleChange}
                 placeholder="Insert address"
               />
@@ -201,7 +214,9 @@ const Form = ({
               <select
                 id="frequency"
                 name="frequency"
-                value={formData.frequency || ''}
+                defaultValue={
+                  selectedOpenMic.frequency || formData.frequency || ''
+                }
                 onChange={handleChange}
               >
                 {frequencyArr.map((el) => (
@@ -235,7 +250,7 @@ const Form = ({
                 <select
                   id="day"
                   name="day"
-                  value={formData.day || ''}
+                  defaultValue={selectedOpenMic.day || formData.day || ''}
                   onChange={handleChange}
                 >
                   {weekdayArr.map((el) => (
@@ -256,7 +271,7 @@ const Form = ({
                   type="date"
                   id="date"
                   name="date"
-                  value={formData.start_time || ''}
+                  defaultValue={selectedOpenMic.date || formData.date || ''}
                   onChange={handleChange}
                   placeholder="Insert Start Time"
                 />
@@ -273,7 +288,9 @@ const Form = ({
                 type="time"
                 id="start_time"
                 name="start_time"
-                value={formData.start_time || ''}
+                defaultValue={
+                  selectedOpenMic.start_time || formData.start_time || ''
+                }
                 onChange={handleChange}
                 placeholder="Insert Start Time"
               />
@@ -289,7 +306,9 @@ const Form = ({
                 type="time"
                 id="finish_time"
                 name="finish_time"
-                value={formData.finish_time || ''}
+                defaultValue={
+                  selectedOpenMic.finish_time || formData.finish_time || ''
+                }
                 onChange={handleChange}
                 placeholder="Insert End Time"
               />
@@ -307,7 +326,11 @@ const Form = ({
                   <select
                     id="instrument_one"
                     name="instrument_one"
-                    value={formData.instrument_one || ''}
+                    defaultValue={
+                      selectedOpenMic.instrument_one ||
+                      formData.instrument_one ||
+                      ''
+                    }
                     onChange={handleChange}
                   >
                     {instrumentsArr.map((el) => (
@@ -322,7 +345,11 @@ const Form = ({
                     <select
                       id="instrument_two"
                       name="instrument_two"
-                      value={formData.instrument_two || ''}
+                      defaultValue={
+                        selectedOpenMic.instrument_two ||
+                        formData.instrument_two ||
+                        ''
+                      }
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
@@ -338,7 +365,11 @@ const Form = ({
                     <select
                       id="instrument_three"
                       name="instrument_three"
-                      value={formData.instrument_three || ''}
+                      defaultValue={
+                        selectedOpenMic.instrument_three ||
+                        formData.instrument_three ||
+                        ''
+                      }
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
@@ -354,7 +385,11 @@ const Form = ({
                     <select
                       id="instrument_four"
                       name="instrument_four"
-                      value={formData.instrument_four || ''}
+                      defaultValue={
+                        selectedOpenMic.instrument_four ||
+                        formData.instrument_four ||
+                        ''
+                      }
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
@@ -370,7 +405,11 @@ const Form = ({
                     <select
                       id="instrument_five"
                       name="instrument_five"
-                      value={formData.instrument_five || ''}
+                      defaultValue={
+                        selectedOpenMic.instrument_five ||
+                        formData.instrument_five ||
+                        ''
+                      }
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
@@ -386,7 +425,11 @@ const Form = ({
                     <select
                       id="instrument_six"
                       name="instrument_six"
-                      value={formData.instrument_six || ''}
+                      defaultValue={
+                        selectedOpenMic.instrument_six ||
+                        formData.instrument_six ||
+                        ''
+                      }
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
@@ -404,7 +447,9 @@ const Form = ({
                 <button class="button" role="button">
                   {displayAddForm ? 'Add' : 'Update'}
                 </button>
-                {/* <button onClick={handleCancel}>Cancel</button> */}
+                <button class="button" role="button" onClick={handleCancel}>
+                  Cancel
+                </button>
               </div>
             </td>
           </tr>

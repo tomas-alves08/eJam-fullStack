@@ -141,6 +141,7 @@ button {
 
 .button {
   display: flex;
+  float: left;
   align-items: center;
   font-family: inherit;
   font-weight: 500;

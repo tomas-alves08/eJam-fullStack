@@ -34,9 +34,7 @@ const OpenMic = ({ inputs }) => {
 
   const handleUpdate = async (status, id) => {
     console.log('Open Mic Id: ', openMicId)
-    // setDisplayUpdate(true)
     dispatch(showUpdate(true, openMicId))
-    // navigate(`/openMics/${openMicId}`)
   }
 
   useEffect(() => {
