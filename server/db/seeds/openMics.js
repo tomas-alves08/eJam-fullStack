@@ -4,6 +4,7 @@ exports.seed = async function (knex) {
   await knex('openMics').insert([
     {
       id: 1,
+      region: 'South Island',
       venue: 'Red16',
       city: 'Nelson',
       location: '19 New Street',

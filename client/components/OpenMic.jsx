@@ -12,7 +12,7 @@ const OpenMic = ({ inputs }) => {
   const { openMicId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const displayUpdate = useSelector((state) => state.updateReducer)
+  let displayUpdate = useSelector((state) => state.updateReducer)
 
   console.log('displayUpdate: ', displayUpdate)
   const openMicArr = useSelector((state) => state.openMicRed)
@@ -34,9 +34,7 @@ const OpenMic = ({ inputs }) => {
 
   const handleUpdate = async (status, id) => {
     console.log('Open Mic Id: ', openMicId)
-    // setDisplayUpdate(true)
     dispatch(showUpdate(true, openMicId))
-    // navigate(`/openMics/${openMicId}`)
   }
 
   useEffect(() => {

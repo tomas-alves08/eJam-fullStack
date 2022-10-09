@@ -27,7 +27,7 @@ export async function addOpenMicAPI(openMic) {
 
   try {
     const resp = await request.post(url).send(openMic)
-    console.log(resp.body)
+    console.log('Resp Add Api: ', resp.body)
     return resp.body
   } catch (err) {
     console.log('ERROR: ', err.message)
