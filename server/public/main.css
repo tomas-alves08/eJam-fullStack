@@ -4,9 +4,11 @@
 }
 
 body {
-  background-color: rgb(233, 105, 105);
+  background-color: rgb(241, 72, 72);
   color: #0a1520;
   font-family: 'Bree Serif', serif;
+  height: 100%;
+  overflow: hidden;
 }
 
 nav {
@@ -24,10 +26,9 @@ nav {
 .logo {
   display: flex;
   float: left;
-  padding: 10px 0;
+  padding: 5px 0;
   font-size: 1.3em;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-style: italic;
   font-family: 'Bree Serif', serif;
 }
@@ -54,14 +55,14 @@ a:hover {
 }
 
 .nav-items {
-  padding: 20px 0 10px;
+  padding: 15px 0 10px;
 }
 
 .nav-item {
   float: left;
   display: block;
-  font-size: 1.4rem;
-  padding: 0 20px;
+  font-size: 1.2rem;
+  padding: 0 10px;
   font-family: 'Bree Serif', serif;
 }
 
@@ -70,55 +71,115 @@ a:hover {
   transition: 0.15s;
 }
 
-.display-one {
+.home-container {
   display: flex;
   float: left;
-  height: 100vh;
+  width: 100%;
+}
+
+.description-container {
   width: 50%;
+  height: 100vh;
+}
+
+.display-one {
+  height: 90vh;
+  width: 50%;
+  background: url('./img/img4.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100% 100vh;
 }
 
 .title-container {
-  padding: 150px 0 0px;
+  /* display: flex;
+  float: left; */
+  padding: 50px 0 0px;
   width: 50%;
   margin: auto;
 }
 
 .title {
   text-align: center;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-size: 60px;
+  font-family: 'Bree Serif', serif;
+  font-size: 3em;
   font-weight: 800;
   font-style: italic;
 }
 
+.icons-container {
+  display: flex;
+  float: left;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+.instrument-icon {
+  margin: 0 5px;
+}
+
+#Keyboard-icon,
+#Drumkit-icon,
+#Congas-icon,
+#Guitar-icon {
+  margin: 0 auto;
+  width: 50px;
+}
+
+#Mic-icon,
+#Saxophone-icon {
+  margin: 0 auto;
+  width: 40px;
+}
+
 .subtitle {
   text-align: center;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Bree Serif', serif;
   font-size: 25px;
 }
 
+.text-container {
+  padding: 20px 0;
+  /* font-size: 0.35em; */
+  width: 90%;
+  margin: auto;
+  color: #27292e;
+}
+
+.text {
+  text-align: center;
+  font-family: 'Bree Serif', serif;
+  font-size: 1.2em;
+  text-align: justify;
+  font-weight: 800;
+  font-style: italic;
+}
+
 .phrase-container {
-  padding: 100px 0;
+  padding: 30px 0;
 }
 
 .phrase {
   text-align: center;
-  font-size: 25px;
-  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.4em;
+  font-family: 'Roboto', sans-serif;
 }
 
 .buttons-container {
-  width: 50%;
-  margin: auto;
+  margin: 0% auto;
+  padding: 0%;
+  width: fit-content;
 }
 
 button {
-  padding: 10px;
+  padding: 15px 10px;
   margin: 10px;
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgb(58, 56, 56);
   font-size: 15px;
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Bree Serif', serif;
   text-decoration: none;
 }
 
@@ -135,32 +196,52 @@ button {
   transition: 0.35s;
 }
 
-.register {
-  position: absolute;
-  left: 50%;
-  background-color: rgb(200, 202, 55);
+.register-button {
+  background-color: rgb(54, 180, 25) !important;
+}
+
+.register-button:hover {
+  opacity: 80%;
 }
 
 .register:hover {
-  background-color: rgb(181, 221, 107);
-  transform: scale(1.1);
-  transition: 0.35s;
+  background-color: rgb(209, 26, 16);
+  color: #0a1520;
+  transform: scale(1.05);
+  transition: 0.15s;
 }
 
-.form-container {
-  padding: 20px auto;
-  margin: 10px auto;
+.register {
+  width: fit-content;
+  margin: auto;
+}
+
+.search-container {
+  /* padding: 20px auto; */
+  margin: 0px auto;
   height: fit-content;
-  width: 80%;
+  width: 90%;
 }
 
-.register-form {
+.search-form {
   padding: 10px;
 }
 
-.form-buttons {
-  margin: 10px auto;
+.search-input {
+  margin: auto;
+  width: 230px;
+  height: 30px;
+  border-radius: 5px;
+  border: solid 1px black;
 }
+
+.search-button {
+  padding: 10px;
+}
+
+/* .form-buttons {
+  margin: 10px auto;
+} */
 
 .button {
   display: flex;
@@ -202,4 +283,5 @@ button {
   border-radius: 5px;
   width: 90%;
   margin: 10px auto;
+  background-color: rgb(226, 138, 232);
 }

@@ -11,7 +11,7 @@ const Nav = () => {
     <>
       <nav className="nav-container">
         <div className="logo">
-          <h1>eJam </h1>
+          <h1>Open Mic NZ </h1>
           <FontAwesomeIcon className="icon-guitar" icon={faGuitar} />
         </div>
         <div className="nav-items">

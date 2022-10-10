@@ -14,39 +14,42 @@ const Search = () => {
   const [search, setSearch] = useState('')
 
   const handleChange = (e) => {
-    console.log('Search: ', e.target.name, ' ', e.target.value)
-    setSearch(e.target.value)
-    console.log(search)
+    let value = e.target.value
+    let city
+
+    if (value.length > 0) {
+      city = value[0].toUpperCase() + value.slice(1).toLowerCase()
+    }
+
+    setSearch(city)
   }
 
-  if (search.length > 0) {
+  if (search !== null) {
     city = citiesData.filter((city) => city.city.match(search))
   }
 
   const handleSearch = (e) => {
     e.preventDefault()
     console.log('Handle Search: ', city)
+
     dispatch(findOpenMics(city))
 
-    setSearch('')
+    // setSearch('')
   }
-
-  // display a search bar containing region, city, day of the week
-  // choose one or more searching parameters to display open mics accordingly
-  // filter all
 
   return (
     <>
-      <div className="form-container">
-        <form onSubmit={handleSearch} className="register-form">
+      <div className="search-container">
+        <form onSubmit={handleSearch} className="search-form">
           <input
             id="city"
             name="city"
             value={search || ''}
-            placeholder="Insert City Name to Find Open Mics"
+            placeholder="  Insert City Name to Find Open Mics"
             onChange={handleChange}
+            className="search-input"
           />
-          <button>Search</button>
+          <button className="search-button">Search</button>
         </form>
       </div>
     </>
