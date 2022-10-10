@@ -53,10 +53,13 @@ export function fetchOneOpenMic(id) {
 }
 
 // SEARCH OPENMICS
-export function searchOpenMicsACT(foundData) {
+export function searchOpenMicsACT(foundData, city) {
   return {
     type: SEARCH_OPENMIC,
-    payload: foundData,
+    payload: {
+      foundData,
+      city,
+    },
   }
 }
 
@@ -64,13 +67,11 @@ export function findOpenMics(foundCity) {
   return async (dispatch) => {
     try {
       const resp = await getOpenMicsAPI()
-      console.log('Find open mics resp: ', resp)
-      console.log('city: ', foundCity[0].city)
-      const foundOpenMics = resp.filter(
-        (openMic) => openMic.city === foundCity[0].city
-      )
+      console.log('Find open mics resp CITY: ', foundCity)
+      console.log('city: ', foundCity)
+      const foundOpenMics = resp.filter((openMic) => openMic.city === foundCity)
       console.log('Find open mics: ', foundOpenMics)
-      dispatch(searchOpenMicsACT(foundOpenMics))
+      dispatch(searchOpenMicsACT(foundOpenMics, foundCity))
     } catch (err) {
       console.log('FIND OPEN MIC: ', err.message)
     }

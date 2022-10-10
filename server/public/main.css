@@ -239,10 +239,6 @@ button {
   padding: 10px;
 }
 
-/* .form-buttons {
-  margin: 10px auto;
-} */
-
 .button {
   display: flex;
   float: left;
@@ -284,4 +280,11 @@ button {
   width: 90%;
   margin: 10px auto;
   background-color: rgb(226, 138, 232);
+}
+
+.openMic-title {
+  font-size: 20px;
+  margin: 10px auto;
+  color: aliceblue;
+  width: 90%;
 }

@@ -19,6 +19,8 @@ const Search = () => {
 
     if (value.length > 0) {
       city = value[0].toUpperCase() + value.slice(1).toLowerCase()
+    } else {
+      city = null
     }
 
     setSearch(city)
@@ -30,9 +32,9 @@ const Search = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    console.log('Handle Search: ', city)
+    console.log('Handle Search: ', city[0]?.city)
 
-    dispatch(findOpenMics(city))
+    dispatch(findOpenMics(city[0]?.city ? city[0]?.city : ''))
 
     // setSearch('')
   }

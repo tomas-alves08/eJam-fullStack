@@ -5,11 +5,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchOpenMics, showUpdate } from '../actions'
 
 const OpenMics = () => {
-  const openMicArr = useSelector((state) => state.searchReducer)
+  const searchData = useSelector((state) => state.searchReducer)
   const dispatch = useDispatch()
 
-  console.log('selector: ', openMicArr)
+  console.log('selector: ', searchData.city)
+  const city = searchData.city
 
+  const openMicArr = searchData.foundData
   const handleLoad = async () => {
     dispatch(fetchOpenMics())
     dispatch(showUpdate(false, ''))
@@ -22,32 +24,34 @@ const OpenMics = () => {
   return (
     <>
       <div className="openMics-container">
-        {openMicArr && (
-          <p className="openMic-title">
-            Open Mics Found in {openMicArr[0]?.city}
-          </p>
+        {city?.length > 0 ? (
+          <p className="openMic-title">Open Mics Found in {city}</p>
+        ) : (
+          city && <p className="openMic-title">No Open Mic Found in {city}</p>
         )}
-        {openMicArr && (
-          <div>
-            {openMicArr?.map((openMic) => (
-              <div className="openMic-card">
-                {openMic?.venue && (
-                  <Link to={`/openMics/${openMic?.id}`}>
-                    <h2 key={openMic?.id}>{openMic?.venue}</h2>
-                  </Link>
-                )}
-                <div>
-                  {openMic?.city && (
-                    <p className="openMic-city">City: {openMic?.city}</p>
-                  )}
-                  {openMic?.day && (
-                    <p className="openMic-day">Day: {openMic?.day}</p>
-                  )}
-                </div>
+        {city === ''
+          ? null
+          : openMicArr && (
+              <div>
+                {openMicArr?.map((openMic) => (
+                  <div className="openMic-card">
+                    {openMic?.venue && (
+                      <Link to={`/openMics/${openMic?.id}`}>
+                        <h2 key={openMic?.id}>{openMic?.venue}</h2>
+                      </Link>
+                    )}
+                    <div>
+                      {openMic?.city && (
+                        <p className="openMic-city">City: {openMic?.city}</p>
+                      )}
+                      {openMic?.day && (
+                        <p className="openMic-day">Day: {openMic?.day}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        )}
+            )}
       </div>
     </>
   )
