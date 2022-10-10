@@ -24,7 +24,7 @@ const OpenMics = () => {
   return (
     <>
       <div className="openMics-container">
-        {city?.length > 0 ? (
+        {city?.length > 0 && openMicArr.length > 0 ? (
           <p className="openMic-title">Open Mics Found in {city}</p>
         ) : (
           city && <p className="openMic-title">No Open Mic Found in {city}</p>
