@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 
 import Nav from './Nav'
 import Home from './Home'
-import About from './About'
-import Contact from './Contact'
+// import About from './About'
+// import Contact from './Contact'
 import Register from './Register'
 import OpenMics from './OpenMics'
 import OpenMic from './OpenMic'
@@ -27,8 +27,8 @@ function App() {
       <div>
         <Routes>
           <Route path={'/'} element={<Home />} />
-          <Route path={'/about'} element={<About />} />
-          <Route path={'/contact'} element={<Contact />} />
+          {/* <Route path={'/about'} element={<About />} /> */}
+          {/* <Route path={'/contact'} element={<Contact />} /> */}
           <Route
             path={'/register'}
             element={<Register inputs={inputs} setInputs={setInputs} />}

@@ -1,28 +1,36 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGuitar } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
+// import from '@fontawesome/free-brands-svg-icons'
+
 const Nav = () => {
   return (
     <>
       <nav className="nav-container">
         <div className="logo">
-          <h1>eJam</h1>
+          <h1>eJam </h1>
+          <FontAwesomeIcon className="icon-guitar" icon={faGuitar} />
         </div>
         <div className="nav-items">
           <ul>
             <li className="nav-item">
               <Link to="/">
-                <p>Home</p>
+                <FontAwesomeIcon icon={faHome} />
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link to="/About">
-                <p>About</p>
+              <Link to="/SignIn">
+                <p>Sign In</p>
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link to="/contact">
-                <p>Contact Us</p>
+              <Link to="/SignUp">
+                <p>Sign Up</p>
               </Link>
             </li>
           </ul>

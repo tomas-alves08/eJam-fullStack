@@ -4,7 +4,7 @@ import OpenMic from './OpenMics'
 
 import { useSelector } from 'react-redux'
 
-const Register = ({ inputs, setInputs }) => {
+const Register = () => {
   const [displayAddForm, setDisplayAddForm] = useState(false)
   const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
 
@@ -14,28 +14,9 @@ const Register = ({ inputs, setInputs }) => {
     setDisplayAddForm(false)
   }, [newOpenMic])
 
-  console.log(inputs)
   return (
     <>
-      <OpenMic
-        inputs={inputs}
-        setInputs={setInputs}
-        displayAddForm={displayAddForm}
-        setDisplayAddForm={setDisplayAddForm}
-        displayUpdateForm={displayUpdateForm}
-        setDisplayUpdateForm={setDisplayUpdateForm}
-      />
-      <button onClick={() => setDisplayAddForm(true)}>Add New Open Mic</button>
-      {displayAddForm && (
-        <Form
-          inputs={inputs}
-          setInputs={setInputs}
-          displayAddForm={displayAddForm}
-          setDisplayAddForm={setDisplayAddForm}
-          displayUpdateForm={displayUpdateForm}
-          setDisplayUpdateForm={setDisplayUpdateForm}
-        />
-      )}
+      <Form />
     </>
   )
 }

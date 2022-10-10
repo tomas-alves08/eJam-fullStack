@@ -8,6 +8,7 @@ import {
 
 export const DISPLAY_OPENMICS = 'DISPLAY_OPENMICS'
 export const DISPLAY_OPENMIC = 'DISPLAY_OPENMIC'
+export const SEARCH_OPENMIC = 'SEARCH_OPENMIC'
 export const ADD_OPENMIC = 'ADD_OPENMIC'
 export const UPDATE_OPENMICS = 'UPDATE_OPENMICS'
 export const UPDATE_DISPLAY = 'UPDATE_DISPLAY'
@@ -47,6 +48,31 @@ export function fetchOneOpenMic(id) {
       dispatch(getOneOpenMicACT(resp))
     } catch (err) {
       console.log('FETCH ONE OPEN MIC ERROR: ', err.message)
+    }
+  }
+}
+
+// SEARCH OPENMICS
+export function searchOpenMicsACT(foundData) {
+  return {
+    type: SEARCH_OPENMIC,
+    payload: foundData,
+  }
+}
+
+export function findOpenMics(foundCity) {
+  return async (dispatch) => {
+    try {
+      const resp = await getOpenMicsAPI()
+      console.log('Find open mics resp: ', resp)
+      console.log('city: ', foundCity[0].city)
+      const foundOpenMics = resp.filter(
+        (openMic) => openMic.city === foundCity[0].city
+      )
+      console.log('Find open mics: ', foundOpenMics)
+      dispatch(searchOpenMicsACT(foundOpenMics))
+    } catch (err) {
+      console.log('FIND OPEN MIC: ', err.message)
     }
   }
 }

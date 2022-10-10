@@ -6,7 +6,7 @@
 body {
   background-color: rgb(233, 105, 105);
   color: #0a1520;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Bree Serif', serif;
 }
 
 nav {
@@ -22,18 +22,35 @@ nav {
 }
 
 .logo {
+  display: flex;
+  float: left;
   padding: 10px 0;
-  font-size: 1.6em;
+  font-size: 1.3em;
   font-family: 'Montserrat Alternates', sans-serif;
   font-weight: 700;
   font-style: italic;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Bree Serif', serif;
 }
 
 .logo:hover {
-  color: rgb(235, 104, 52);
+  color: rgb(167, 35, 35);
   transform: scale(1.05);
-  transition: 0.35s;
+  transition: 0.15s;
+}
+
+.icon-guitar {
+  width: 40px;
+  padding-top: 8px;
+  font-size: 1.3em;
+}
+
+a {
+  color: rgb(237, 236, 236);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(167, 35, 35);
 }
 
 .nav-items {
@@ -45,13 +62,19 @@ nav {
   display: block;
   font-size: 1.4rem;
   padding: 0 20px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bree Serif', serif;
 }
 
 .nav-item:hover {
-  color: rgb(235, 104, 52);
-  transform: scale(1.2);
-  transition: 0.35s;
+  transform: scale(1.05);
+  transition: 0.15s;
+}
+
+.display-one {
+  display: flex;
+  float: left;
+  height: 100vh;
+  width: 50%;
 }
 
 .title-container {
@@ -167,4 +190,16 @@ button {
 
 .button:active {
   box-shadow: 0 0.3em 1em -0.5em #837150;
+}
+
+.openMics-container {
+  width: 90%;
+  height: 100vh;
+}
+
+.openMic-card {
+  border: 3px solid black;
+  border-radius: 5px;
+  width: 90%;
+  margin: 10px auto;
 }
