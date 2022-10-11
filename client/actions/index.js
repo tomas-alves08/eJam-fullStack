@@ -6,8 +6,11 @@ import {
   updateOpenMicAPI,
 } from '../api'
 
+import { monthsArr } from '../funcs'
+
 export const DISPLAY_OPENMICS = 'DISPLAY_OPENMICS'
 export const DISPLAY_OPENMIC = 'DISPLAY_OPENMIC'
+export const SEARCH_OPENMIC = 'SEARCH_OPENMIC'
 export const ADD_OPENMIC = 'ADD_OPENMIC'
 export const UPDATE_OPENMICS = 'UPDATE_OPENMICS'
 export const UPDATE_DISPLAY = 'UPDATE_DISPLAY'
@@ -51,6 +54,32 @@ export function fetchOneOpenMic(id) {
   }
 }
 
+// SEARCH OPENMICS
+export function searchOpenMicsACT(foundData, city) {
+  return {
+    type: SEARCH_OPENMIC,
+    payload: {
+      foundData,
+      city,
+    },
+  }
+}
+
+export function findOpenMics(foundCity) {
+  return async (dispatch) => {
+    try {
+      const resp = await getOpenMicsAPI()
+      console.log('Find open mics resp CITY: ', foundCity)
+      console.log('city: ', foundCity)
+      const foundOpenMics = resp.filter((openMic) => openMic.city === foundCity)
+      console.log('Find open mics: ', foundOpenMics)
+      dispatch(searchOpenMicsACT(foundOpenMics, foundCity))
+    } catch (err) {
+      console.log('FIND OPEN MIC: ', err.message)
+    }
+  }
+}
+
 // CREATE OPENMICS ACTIONS
 
 export function addOpenMicACT(openMic) {
@@ -62,7 +91,14 @@ export function addOpenMicACT(openMic) {
 
 export function createOpenMic(openMic) {
   return async (dispatch) => {
-    console.log('Create OpenMic: ', openMic)
+    // Change Date Format from '2022-10-19' to '2022-OCT-19'
+    let dateArr = openMic.date.split('-')
+    const month = monthsArr.find((el, i) => i == dateArr[1])
+
+    dateArr[1] = month
+    const date = dateArr.reverse().join('-')
+    openMic.date = date
+
     try {
       const resp = await addOpenMicAPI(openMic)
       console.log('resp ID: ', resp.id)

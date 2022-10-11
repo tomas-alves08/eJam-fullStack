@@ -4,11 +4,12 @@ import { useDispatch } from 'react-redux'
 
 import Nav from './Nav'
 import Home from './Home'
-import About from './About'
+// import About from './About'
 import Contact from './Contact'
 import Register from './Register'
 import OpenMics from './OpenMics'
 import OpenMic from './OpenMic'
+import Footer from './Footer'
 
 import { fetchOpenMics } from '../actions'
 
@@ -27,7 +28,7 @@ function App() {
       <div>
         <Routes>
           <Route path={'/'} element={<Home />} />
-          <Route path={'/about'} element={<About />} />
+          {/* <Route path={'/about'} element={<About />} /> */}
           <Route path={'/contact'} element={<Contact />} />
           <Route
             path={'/register'}
@@ -40,6 +41,7 @@ function App() {
           />
         </Routes>
       </div>
+      <Footer />
     </>
   )
 }

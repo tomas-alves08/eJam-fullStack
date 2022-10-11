@@ -1,17 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import citiesData from '../../nz.json'
+import {
+  weekdayArr,
+  frequencyArr,
+  weekOfTheMonthArr,
+  instrumentsArr,
+  citiesNorthIsland,
+  citiesSouthIsland,
+} from '../funcs.js'
 
 import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
 
-const Form = ({ displayAddForm }) => {
+const Form = () => {
   let formFields = {
     venue: '',
     location: '',
     city: '',
     frequency: '',
     day: '',
+    week: '',
     date: '',
     start_time: '',
     finish_time: '',
@@ -29,7 +37,7 @@ const Form = ({ displayAddForm }) => {
   // Update Redux Store State
   let displayUpdate = useSelector((state) => state.updateReducer)
   const formDataId = displayUpdate.id
-  const status = displayUpdate.status
+  // const status = displayUpdate.status
   console.log('Display Update: ', displayUpdate)
 
   // OpenMics Redux Store State
@@ -42,52 +50,8 @@ const Form = ({ displayAddForm }) => {
 
   const [formData, setFormData] = useState(formFields)
 
-  // Dropdown Arrays
-  const frequencyArr = [
-    'Select the Frequency of the Event',
-    'Weekly',
-    'Fortnightly',
-    'Monthly',
-    'One-Off',
-  ]
-  const weekdayArr = [
-    'Select Day of the Week',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ]
-  const weekOfTheMonthArr = [
-    'Select the week of the month',
-    'First',
-    'Second',
-    'Third',
-    'Last',
-  ]
-  const instrumentsArr = [
-    'Select Instrument',
-    'Acoustic Guitar',
-    'Eletric Guitar',
-    'Bass',
-    'Drum Kit',
-    'Cajon',
-    'Congas',
-    'Bongos',
-    'Shakers',
-    'Saxophone',
-    'Trumpet',
-    'Flute',
-  ]
-
   console.log('status: ', displayUpdate.status)
   console.log('Form Fields: ', formFields)
-
-  // Cities in NZ
-  const citiesNorthIsland = citiesData.filter((city) => city.lat >= -41.2889)
-  const citiesSouthIsland = citiesData.filter((city) => city.lat < -41.2889)
 
   // Functions
   const handleChange = (e) => {
@@ -107,6 +71,7 @@ const Form = ({ displayAddForm }) => {
     dispatch(createOpenMic(formData))
 
     setFormData(formFields)
+    navigate('/')
   }
 
   const handleUpdate = async (e) => {
@@ -116,7 +81,7 @@ const Form = ({ displayAddForm }) => {
     dispatch(showUpdate(false, formDataId))
     setFormData(formFields)
     displayUpdate.status = false
-    navigate('/register')
+    navigate('/')
   }
 
   const handleCancel = () => {
@@ -196,7 +161,7 @@ const Form = ({ displayAddForm }) => {
                     : formData.venue || ''
                 }
                 onChange={handleChange}
-                placeholder="Inser venue"
+                placeholder="Insert venue"
               />
             </td>
           </tr>
@@ -249,7 +214,16 @@ const Form = ({ displayAddForm }) => {
                 <label htmlFor="week-month">Week of the Month:</label>
               </td>
               <td>
-                <select id="week-month">
+                <select
+                  id="week-month"
+                  name="week"
+                  defaultValue={
+                    displayUpdate?.status
+                      ? selectedOpenMic.week || formData.week || ''
+                      : formData.week || ''
+                  }
+                  onChange={handleChange}
+                >
                   {weekOfTheMonthArr.map((el) => (
                     <option value={`${el}`}>{`${el}`}</option>
                   ))}
@@ -486,7 +460,7 @@ const Form = ({ displayAddForm }) => {
             <td colSpan={2}>
               <div className="form-buttons">
                 <button class="button" role="button">
-                  {displayAddForm ? 'Add' : 'Update'}
+                  {displayUpdate.status ? 'Update' : 'Add'}
                 </button>
                 <button class="button" role="button" onClick={handleCancel}>
                   Cancel
