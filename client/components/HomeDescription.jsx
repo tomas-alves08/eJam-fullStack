@@ -1,10 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGuitar } from '@fortawesome/free-solid-svg-icons'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 const HomeDescription = () => {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate('/register')
+  }
   return (
     <>
       <div className="description-container">
@@ -64,17 +66,23 @@ const HomeDescription = () => {
         </div>
         <div className="text-container">
           <p className="text">
-            All open mic enthusiasts are welcome whether you are here to find
-            places to perform, to watch some live music or to promote your
-            venue.
+            All open mic enthusiasts are welcome whether you are:
+            <ul className="bullet-points">
+              <li>
+                Looking for a place to perform or jam with other like minded
+                people
+              </li>
+              <li>Trying to promote your venue</li>
+              <li>Just looking for live music</li>
+            </ul>
           </p>
         </div>
         <div className="phrase-container">
           <p className="phrase">Share your music, share your love!</p>
         </div>
         <div className="buttons-container">
-          <button className="button register-button">
-            <Link to="/register">Register an Open Mic</Link>
+          <button onClick={handleClick} className="button register-button">
+            Register an Open Mic
           </button>
         </div>
       </div>

@@ -51,7 +51,7 @@ const Search = () => {
             onChange={handleChange}
             className="search-input"
           />
-          <button className="search-button">Search</button>
+          <button className="button search-button">Search</button>
         </form>
       </div>
     </>

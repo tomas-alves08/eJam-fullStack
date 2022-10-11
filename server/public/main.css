@@ -4,7 +4,8 @@
 }
 
 body {
-  background-color: rgb(241, 72, 72);
+  /* background-color: rgb(241, 72, 72); */
+  background: linear-gradient(0deg, rgb(211, 106, 26), rgb(241, 72, 72));
   color: #0a1520;
   font-family: 'Bree Serif', serif;
   height: 100%;
@@ -91,8 +92,6 @@ a:hover {
 }
 
 .title-container {
-  /* display: flex;
-  float: left; */
   padding: 50px 0 0px;
   width: 50%;
   margin: auto;
@@ -113,7 +112,7 @@ a:hover {
   width: 100%;
   margin: 0 auto;
   padding-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .instrument-icon {
@@ -141,7 +140,7 @@ a:hover {
 }
 
 .text-container {
-  padding: 20px 0;
+  padding: 40px 0 70px;
   /* font-size: 0.35em; */
   width: 90%;
   margin: auto;
@@ -157,8 +156,16 @@ a:hover {
   font-style: italic;
 }
 
+.bullet-points {
+  padding: 0;
+  /* font-size: 0.35em; */
+  width: 90%;
+  margin: auto;
+  color: #27292e;
+}
+
 .phrase-container {
-  padding: 30px 0;
+  padding-bottom: 20px;
 }
 
 .phrase {
@@ -183,29 +190,11 @@ button {
   text-decoration: none;
 }
 
-.find {
-  position: absolute;
-  right: 50%;
-  background-color: rgb(219, 90, 68);
-  color: rgb(236, 231, 231);
-}
-
-.find:hover {
-  background-color: rgb(179, 62, 46);
-  transform: scale(1.1);
-  transition: 0.35s;
-}
-
 .register-button {
-  background-color: rgb(54, 180, 25) !important;
-}
-
-.register-button:hover {
-  opacity: 80%;
+  background-color: rgb(3, 3, 3) !important;
 }
 
 .register:hover {
-  background-color: rgb(209, 26, 16);
   color: #0a1520;
   transform: scale(1.05);
   transition: 0.15s;
@@ -217,10 +206,10 @@ button {
 }
 
 .search-container {
-  /* padding: 20px auto; */
   margin: 0px auto;
   height: fit-content;
   width: 90%;
+  overflow: auto;
 }
 
 .search-form {
@@ -240,20 +229,17 @@ button {
 }
 
 .button {
-  display: flex;
-  float: left;
   align-items: center;
   font-family: inherit;
   font-weight: 500;
   font-size: 16px;
   padding: 0.7em 1.4em 0.7em 1.1em;
   color: white;
-  background: #ad5389;
-  background: linear-gradient(0deg, #a75b1498, #a73e1498);
+  background: #050504;
   border: none;
   box-shadow: 0 0.7em 1.5em -0.5em #62300498;
   letter-spacing: 0.05em;
-  border-radius: 20em;
+  border-radius: 10em;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
@@ -261,30 +247,97 @@ button {
 }
 
 .button:hover {
-  box-shadow: 0 0.5em 1.5em -0.5em #837150;
   transform: scale(1.05);
-}
-
-.button:active {
-  box-shadow: 0 0.3em 1em -0.5em #837150;
 }
 
 .openMics-container {
   width: 90%;
   height: 100vh;
+  overflow: scroll;
 }
 
 .openMic-card {
-  border: 3px solid black;
+  border: 2px solid rgb(70, 49, 39);
   border-radius: 5px;
   width: 90%;
   margin: 10px auto;
-  background-color: rgb(226, 138, 232);
+  background-color: #9d3c27;
+  opacity: 92%;
 }
 
 .openMic-title {
   font-size: 20px;
   margin: 10px auto;
+  padding: 10px;
   color: aliceblue;
+  background-color: #050504;
   width: 90%;
+  border-radius: 5px;
+  opacity: 90%;
+}
+
+.openMics-card-container {
+  height: 500px;
+  overflow: auto;
+}
+
+.openMic-venue {
+  font-size: 1.6em;
+  color: azure;
+  padding: 0.3em;
+}
+
+.openMic-info {
+  padding: 0 0.3em 0.3em;
+  color: rgb(218, 220, 220);
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background-color: black;
+  color: rgb(253, 242, 242);
+}
+
+.register-page-container {
+  height: 100vh;
+}
+
+.display-container {
+  height: 100vh;
+}
+
+.form-container {
+  border: solid 1.5px rgb(160, 32, 32);
+  border-radius: 10px;
+  width: fit-content;
+  padding: 20px;
+  margin: 30px auto;
+  background-color: #c04000;
+}
+
+.register-title {
+  margin: 5px auto 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.openmic-page {
+  margin: 5px 50px;
+}
+
+.openmic-page-venue {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.openmic-page-info {
+  font-size: 1.5em;
+  margin-bottom: 5px;
 }

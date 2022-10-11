@@ -19,6 +19,7 @@ const Form = () => {
     city: '',
     frequency: '',
     day: '',
+    week: '',
     date: '',
     start_time: '',
     finish_time: '',
@@ -160,7 +161,7 @@ const Form = () => {
                     : formData.venue || ''
                 }
                 onChange={handleChange}
-                placeholder="Inser venue"
+                placeholder="Insert venue"
               />
             </td>
           </tr>
@@ -213,7 +214,16 @@ const Form = () => {
                 <label htmlFor="week-month">Week of the Month:</label>
               </td>
               <td>
-                <select id="week-month">
+                <select
+                  id="week-month"
+                  name="week"
+                  defaultValue={
+                    displayUpdate?.status
+                      ? selectedOpenMic.week || formData.week || ''
+                      : formData.week || ''
+                  }
+                  onChange={handleChange}
+                >
                   {weekOfTheMonthArr.map((el) => (
                     <option value={`${el}`}>{`${el}`}</option>
                   ))}

@@ -43,6 +43,22 @@ export const instrumentsArr = [
   'Flute',
 ]
 
+export const monthsArr = [
+  0,
+  'JAN',
+  'FEB',
+  'MAR',
+  'APR',
+  'MAY',
+  'JUN',
+  'JUL',
+  'AGO',
+  'SEP',
+  'OCT',
+  'NOV',
+  'DEC',
+]
+
 // Cities in NZ
 export const citiesNorthIsland = citiesData.filter(
   (city) => city.lat >= -41.2889

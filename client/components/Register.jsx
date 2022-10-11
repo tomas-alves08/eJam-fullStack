@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Form from './Form'
-import OpenMic from './OpenMics'
-
-import { useSelector } from 'react-redux'
 
 const Register = () => {
-  const [displayAddForm, setDisplayAddForm] = useState(false)
-  const [displayUpdateForm, setDisplayUpdateForm] = useState(false)
-
-  const newOpenMic = useSelector((state) => state.openMicRed)
-
-  useEffect(() => {
-    setDisplayAddForm(false)
-  }, [newOpenMic])
-
   return (
     <>
-      <Form />
+      <p className="register-title">REGISTER A NEW OPEN MIC</p>
+      <div className="register-page-container">
+        <Form />
+      </div>
     </>
   )
 }

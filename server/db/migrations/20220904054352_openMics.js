@@ -8,6 +8,7 @@ exports.up = function (knex) {
     table.string('frequency')
     table.string('day')
     table.string('date')
+    table.string('week')
     table.string('start_time')
     table.string('finish_time')
     table.string('instrument_one')

@@ -32,21 +32,37 @@ const OpenMics = () => {
         {city === ''
           ? null
           : openMicArr && (
-              <div>
+              <div className="openMics-card-container">
                 {openMicArr?.map((openMic) => (
                   <div className="openMic-card">
                     {openMic?.venue && (
                       <Link to={`/openMics/${openMic?.id}`}>
-                        <h2 key={openMic?.id}>{openMic?.venue}</h2>
+                        <h2 className="openMic-venue" key={openMic?.id}>
+                          {openMic?.venue}
+                        </h2>
                       </Link>
                     )}
-                    <div>
+                    <div className="openMic-info">
                       {openMic?.city && (
                         <p className="openMic-city">City: {openMic?.city}</p>
                       )}
-                      {openMic?.day && (
-                        <p className="openMic-day">Day: {openMic?.day}</p>
-                      )}
+                      {openMic?.frequency &&
+                        (openMic?.frequency === 'Weekly' ||
+                        openMic?.frequency === 'Fortnightly' ? (
+                          <p className="openMic-day">
+                            {openMic?.frequency} on {openMic?.day}s
+                          </p>
+                        ) : openMic?.frequency === 'Monthly' ? (
+                          <p className="openMic-day">
+                            Every {openMic?.week} {openMic?.day} of the Month
+                          </p>
+                        ) : (
+                          openMic?.frequency === 'One-Off' && (
+                            <p className="openMic-day">
+                              One-Off Event on {openMic?.date}
+                            </p>
+                          )
+                        ))}
                     </div>
                   </div>
                 ))}

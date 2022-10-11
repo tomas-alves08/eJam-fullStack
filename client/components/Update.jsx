@@ -2,7 +2,7 @@ import React from 'react'
 
 import Form from './Form'
 
-const Update = ({ id, venue, address, city, start_time, finish_time }) => {
+const Update = () => {
   return <Form />
 }
 

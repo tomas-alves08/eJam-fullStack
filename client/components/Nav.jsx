@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGuitar } from '@fortawesome/free-solid-svg-icons'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
-// import from '@fontawesome/free-brands-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 const Nav = () => {
   return (
@@ -19,6 +19,12 @@ const Nav = () => {
             <li className="nav-item">
               <Link to="/">
                 <FontAwesomeIcon icon={faHome} />
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to="/contact">
+                <FontAwesomeIcon icon={faEnvelope} />
               </Link>
             </li>
 
