@@ -10,10 +10,12 @@ const Nav = () => {
   return (
     <>
       <nav className="nav-container">
-        <div className="logo">
-          <h1>Open Mic NZ </h1>
-          <FontAwesomeIcon className="icon-guitar" icon={faGuitar} />
-        </div>
+        <Link to="/">
+          <div className="logo">
+            <h1>Open Mic NZ </h1>
+            <FontAwesomeIcon className="icon-guitar" icon={faGuitar} />
+          </div>
+        </Link>
         <div className="nav-items">
           <ul>
             <li className="nav-item">

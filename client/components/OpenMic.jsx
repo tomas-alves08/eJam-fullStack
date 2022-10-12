@@ -17,10 +17,9 @@ const OpenMic = () => {
   console.log('displayUpdate: ', displayUpdate)
   const openMicArr = useSelector((state) => state.openMicRed)
 
+  const selectedOpenMic = openMicArr.find((openMic) => openMic.id == openMicId)
+
   const handleLoadOpenMic = async () => {
-    const selectedOpenMic = openMicArr.find(
-      (openMic) => openMic.id == openMicId
-    )
     setFoundOpenMic(selectedOpenMic)
 
     if (selectedOpenMic !== '') setDisplayOpenMic(true)
@@ -29,17 +28,18 @@ const OpenMic = () => {
   const handleDelete = async (id) => {
     dispatch(removeOpenMic(openMicId))
     alert('Open Deleted')
-    navigate('/register')
+    navigate('/')
   }
 
   const handleUpdate = async (status, id) => {
     console.log('Open Mic Id: ', openMicId)
     dispatch(showUpdate(true, openMicId))
+    navigate(`/openMics/${openMicId}/update`)
   }
 
   useEffect(() => {
     handleLoadOpenMic()
-  }, [openMicArr])
+  }, [selectedOpenMic])
 
   return (
     <div>
@@ -109,9 +109,6 @@ const OpenMic = () => {
                 Delete
               </button>
             )}
-          </div>
-          <div className="openmic-page-form">
-            {displayUpdate.status && <Form />}
           </div>
         </div>
       </div>
