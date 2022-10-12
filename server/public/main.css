@@ -328,7 +328,11 @@ button {
 }
 
 .openmic-page {
-  margin: 5px 50px;
+  margin: 20px 50px;
+  padding: 15px;
+  border: 1.5px solid rgb(75, 19, 19);
+  border-radius: 10px;
+  background-color: #c04000;
 }
 
 .openmic-page-venue {
@@ -338,6 +342,11 @@ button {
 }
 
 .openmic-page-info {
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-bottom: 5px;
+  color: #27292e;
+}
+
+.update-page-container {
+  height: 100vh;
 }

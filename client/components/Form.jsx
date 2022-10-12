@@ -81,10 +81,11 @@ const Form = () => {
     dispatch(showUpdate(false, formDataId))
     setFormData(formFields)
     displayUpdate.status = false
-    navigate('/')
+    navigate(`/openMics/${formDataId}`)
   }
 
   const handleCancel = () => {
+    if (displayUpdate.status) navigate(`/openMics/${formDataId}`)
     dispatch(showUpdate(false, formDataId))
   }
 

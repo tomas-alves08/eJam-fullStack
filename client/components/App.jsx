@@ -10,6 +10,7 @@ import Register from './Register'
 import OpenMics from './OpenMics'
 import OpenMic from './OpenMic'
 import Footer from './Footer'
+import Update from './Update'
 
 import { fetchOpenMics } from '../actions'
 
@@ -39,6 +40,7 @@ function App() {
             path="openMics/:openMicId"
             element={<OpenMic inputs={inputs} />}
           />
+          <Route path="openMics/:openMicId/update" element={<Update />} />
         </Routes>
       </div>
       <Footer />
