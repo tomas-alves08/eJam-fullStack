@@ -43,7 +43,7 @@ const Form = () => {
 
   // OpenMics Redux Store State
   const selectedOpenMic = useSelector((state) => state.openMicRed)
-  // console.log('OpenMic? ', openMicArr)
+  console.log('Selected OpenMic: ', selectedOpenMic)
   // const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
 
   if (displayUpdate.status === true) {
@@ -91,11 +91,14 @@ const Form = () => {
     console.log('FormData: ', formData)
     // const updatedOpenMic = formData.find((item) => item.id === formDataId)
     dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
-    // dispatch(changeOpenMic(formDataId, updatedOpenMic))
+
     dispatch(showUpdate(false, formDataId))
     setFormData(formFields)
     displayUpdate.status = false
     navigate(`/openMics/${formDataId}`)
+
+    // this command refreshes the page
+    navigate(0)
   }
 
   const handleCancel = () => {
@@ -120,7 +123,7 @@ const Form = () => {
                 name="region"
                 defaultValue={
                   displayUpdate?.status
-                    ? selectedOpenMic.region || formData.region || ''
+                    ? selectedOpenMic?.region || formData.region || ''
                     : formData.region || ''
                 }
                 onChange={handleChange}
@@ -143,7 +146,7 @@ const Form = () => {
                   name="city"
                   defaultValue={
                     displayUpdate?.status
-                      ? selectedOpenMic.city || formData.city || ''
+                      ? selectedOpenMic?.city || formData.city || ''
                       : formData.city || ''
                   }
                   onChange={handleChange}

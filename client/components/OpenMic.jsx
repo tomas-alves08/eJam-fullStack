@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 import { showUpdate, removeOpenMic, fetchOneOpenMic } from '../actions'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,7 +13,7 @@ const OpenMic = () => {
   const { openMicId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const history = useHistory()
+  // const history = useHistory()
 
   let displayUpdate = useSelector((state) => state.updateReducer)
   // const updatedOpenMic = useSelector((state) => state.showUpdatedReducer)
@@ -44,8 +44,6 @@ const OpenMic = () => {
     dispatch(fetchOneOpenMic(openMicId))
     console.log('Open Mic Id: ', openMicId)
     dispatch(showUpdate(true, openMicId))
-
-    // history.go(0)
 
     navigate(`/openMics/${openMicId}/update`)
   }

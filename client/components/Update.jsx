@@ -16,6 +16,7 @@ const Update = () => {
 
   // console.log('Updated OpenMic: ', selectedOpenMic)
   // console.log(openMicArr)
+
   console.log(displayUpdate)
   return (
     <div className="update-page-container">
