@@ -16,7 +16,7 @@ const HomeDescription = () => {
         <div className="icons-container">
           <div className="instrument-icon">
             <img
-              class="icon"
+              className="icon"
               id="Guitar-icon"
               src="./img/instrument1.png"
               alt="Guitar-icon"
@@ -24,21 +24,15 @@ const HomeDescription = () => {
           </div>
           <div className="instrument-icon">
             <img
-              class="icon"
+              className="icon"
               id="Keyboard-icon"
               src="./img/instrument2.png"
               alt="Keyboard-icon"
             />
           </div>
-          {/* <img
-            class="icon"
-            id="Drumkit-icon"
-            src="./img/instrument3.png"
-            alt="drumkit-icon"
-          /> */}
           <div className="instrument-icon">
             <img
-              class="icon"
+              className="icon"
               id="Congas-icon"
               src="./img/instrument4.png"
               alt="congas-icon"
@@ -46,7 +40,7 @@ const HomeDescription = () => {
           </div>
           <div className="instrument-icon">
             <img
-              class="icon"
+              className="icon"
               id="Mic-icon"
               src="./img/instrument5.png"
               alt="mic-icon"
@@ -54,7 +48,7 @@ const HomeDescription = () => {
           </div>
           <div className="instrument-icon">
             <img
-              class="icon"
+              className="icon"
               id="Saxophone-icon"
               src="./img/instrument6.png"
               alt="saxophone-icon"

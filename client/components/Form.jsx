@@ -11,6 +11,7 @@ import {
 } from '../funcs.js'
 
 import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
+import OpenMic from './OpenMic.jsx'
 
 const Form = () => {
   let formFields = {
@@ -41,8 +42,9 @@ const Form = () => {
   console.log('Display Update: ', displayUpdate)
 
   // OpenMics Redux Store State
-  const openMicArr = useSelector((state) => state.openMicRed)
-  const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
+  const selectedOpenMic = useSelector((state) => state.openMicRed)
+  // console.log('OpenMic? ', openMicArr)
+  // const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
 
   if (displayUpdate.status === true) {
     formFields = { ...selectedOpenMic }
@@ -58,10 +60,20 @@ const Form = () => {
     const name = e.target.name
     const value = e.target.value
     console.log(e.target.value)
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
+
+    console.log('SELECTED OPEN MIC: ', selectedOpenMic)
+
+    if (displayUpdate.status) {
+      setFormData({
+        ...selectedOpenMic,
+        [name]: value,
+      })
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      })
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -76,8 +88,10 @@ const Form = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
-
+    console.log('FormData: ', formData)
+    // const updatedOpenMic = formData.find((item) => item.id === formDataId)
     dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
+    // dispatch(changeOpenMic(formDataId, updatedOpenMic))
     dispatch(showUpdate(false, formDataId))
     setFormData(formFields)
     displayUpdate.status = false
@@ -136,11 +150,17 @@ const Form = () => {
                 >
                   {formData.region === 'North Island' &&
                     citiesNorthIsland.map((city) => (
-                      <option value={`${city.city}`}>{`${city.city}`}</option>
+                      <option
+                        key={city.id}
+                        value={`${city.city}`}
+                      >{`${city.city}`}</option>
                     ))}
                   {formData.region === 'South Island' &&
                     citiesSouthIsland.map((city) => (
-                      <option value={`${city.city}`}>{`${city.city}`}</option>
+                      <option
+                        key={city.id}
+                        value={`${city.city}`}
+                      >{`${city.city}`}</option>
                     ))}
                 </select>
               </td>
@@ -203,7 +223,7 @@ const Form = () => {
                 onChange={handleChange}
               >
                 {frequencyArr.map((el) => (
-                  <option value={`${el}`}>{`${el}`}</option>
+                  <option key={el.id} value={`${el}`}>{`${el}`}</option>
                 ))}
               </select>
             </td>
@@ -226,7 +246,7 @@ const Form = () => {
                   onChange={handleChange}
                 >
                   {weekOfTheMonthArr.map((el) => (
-                    <option value={`${el}`}>{`${el}`}</option>
+                    <option key={el.id} value={`${el}`}>{`${el}`}</option>
                   ))}
                 </select>
               </td>
@@ -250,7 +270,7 @@ const Form = () => {
                   onChange={handleChange}
                 >
                   {weekdayArr.map((el) => (
-                    <option value={`${el}`}>{`${el}`}</option>
+                    <option key={el.id} value={`${el}`}>{`${el}`}</option>
                   ))}
                 </select>
               </td>
@@ -340,7 +360,7 @@ const Form = () => {
                     onChange={handleChange}
                   >
                     {instrumentsArr.map((el) => (
-                      <option value={`${el}`}>{`${el}`}</option>
+                      <option key={el.id} value={`${el}`}>{`${el}`}</option>
                     ))}
                   </select>
                 </div>
@@ -361,7 +381,7 @@ const Form = () => {
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
-                        <option value={`${el}`}>{`${el}`}</option>
+                        <option key={el.id} value={`${el}`}>{`${el}`}</option>
                       ))}
                     </select>
                   </div>
@@ -383,7 +403,7 @@ const Form = () => {
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
-                        <option value={`${el}`}>{`${el}`}</option>
+                        <option key={el.id} value={`${el}`}>{`${el}`}</option>
                       ))}
                     </select>
                   </div>
@@ -427,7 +447,7 @@ const Form = () => {
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
-                        <option value={`${el}`}>{`${el}`}</option>
+                        <option key={el.id} value={`${el}`}>{`${el}`}</option>
                       ))}
                     </select>
                   </div>
@@ -449,7 +469,7 @@ const Form = () => {
                       onChange={handleChange}
                     >
                       {instrumentsArr.map((el) => (
-                        <option value={`${el}`}>{`${el}`}</option>
+                        <option key={el.id} value={`${el}`}>{`${el}`}</option>
                       ))}
                     </select>
                   </div>
@@ -460,10 +480,10 @@ const Form = () => {
           <tr>
             <td colSpan={2}>
               <div className="form-buttons">
-                <button class="button" role="button">
+                <button className="button" role="button">
                   {displayUpdate.status ? 'Update' : 'Add'}
                 </button>
-                <button class="button" role="button" onClick={handleCancel}>
+                <button className="button" role="button" onClick={handleCancel}>
                   Cancel
                 </button>
               </div>
