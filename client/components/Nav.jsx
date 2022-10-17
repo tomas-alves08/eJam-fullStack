@@ -31,13 +31,13 @@ const Nav = () => {
             </li>
 
             <li className="nav-item">
-              <Link to="/SignIn">
+              <Link to="/signin">
                 <p>Sign In</p>
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link to="/SignUp">
+              <Link to="/signup">
                 <p>Sign Up</p>
               </Link>
             </li>

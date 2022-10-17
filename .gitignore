@@ -2,6 +2,7 @@ node_modules
 bundle.js
 bundle.js.map
 dev.sqlite3
+.env
 # Compiled class file
 *.class
 
