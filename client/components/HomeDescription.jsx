@@ -1,8 +1,17 @@
-import React from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../firebase-config'
 
 const HomeDescription = () => {
   const navigate = useNavigate()
+
+  const [user, setUser] = useState(false)
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
 
   const handleClick = () => {
     navigate('/register')
@@ -75,9 +84,11 @@ const HomeDescription = () => {
           <p className="phrase">Share your music, share your love!</p>
         </div>
         <div className="buttons-container">
-          <button onClick={handleClick} className="button register-button">
-            Register an Open Mic
-          </button>
+          {user && (
+            <button onClick={handleClick} className="button register-button">
+              Register an Open Mic
+            </button>
+          )}
         </div>
       </div>
     </>

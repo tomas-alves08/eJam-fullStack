@@ -29,7 +29,7 @@ function App() {
       <div>
         <Routes>
           <Route path={'/'} element={<Home />} />
-          <Route path={'/signup'} element={<AuthForm />} />
+          <Route path={'/signin'} element={<AuthForm />} />
           <Route path={'/contact'} element={<Contact />} />
           <Route
             path={'/register'}

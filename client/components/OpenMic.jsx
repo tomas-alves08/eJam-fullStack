@@ -4,7 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { showUpdate, removeOpenMic, fetchOneOpenMic } from '../actions'
 import { useDispatch, useSelector } from 'react-redux'
 
-import Form from './Form'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../firebase-config'
 
 const OpenMic = () => {
   const [foundOpenMic, setFoundOpenMic] = useState(null)
@@ -13,8 +14,15 @@ const OpenMic = () => {
   const { openMicId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  // const history = useHistory()
 
+  // AUTH
+  const [user, setUser] = useState(false)
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
+
+  // REDUX
   let displayUpdate = useSelector((state) => state.updateReducer)
   // const updatedOpenMic = useSelector((state) => state.showUpdatedReducer)
   const openMicResp = useSelector((state) => state.openMicRed)
@@ -24,7 +32,7 @@ const OpenMic = () => {
   let selectedOpenMic =
     openMicResp.length > 1
       ? openMicResp?.find((openMic) => openMic.id == openMicId)
-      : openMicResp
+      : openMicResp[0]
 
   console.log('Selected OpenMic: ', selectedOpenMic)
 
@@ -106,21 +114,23 @@ const OpenMic = () => {
             </p>
           )}
 
-          <div>
-            {foundOpenMic !== null && (
-              <button className="button" onClick={handleUpdate}>
-                Update
-              </button>
-            )}
-            {foundOpenMic !== null && (
-              <button
-                className="button"
-                onClick={() => handleDelete(foundOpenMic?.id)}
-              >
-                Delete
-              </button>
-            )}
-          </div>
+          {user && (
+            <div>
+              {foundOpenMic !== null && (
+                <button className="button" onClick={handleUpdate}>
+                  Update
+                </button>
+              )}
+              {foundOpenMic !== null && (
+                <button
+                  className="button"
+                  onClick={() => handleDelete(foundOpenMic?.id)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

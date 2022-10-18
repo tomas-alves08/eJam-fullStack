@@ -15,6 +15,7 @@ export const ADD_OPENMIC = 'ADD_OPENMIC'
 export const UPDATE_OPENMICS = 'UPDATE_OPENMICS'
 export const UPDATE_DISPLAY = 'UPDATE_DISPLAY'
 export const DELETE_OPENMICS = 'DELETE_OPENMICS'
+export const USER_TOKEN = 'USER_TOKEN'
 
 // GET OPENMICS ACTIONS
 
@@ -129,7 +130,7 @@ export function showUpdate(status, id) {
     try {
       dispatch(displayUpdateACT(status, id))
     } catch (err) {
-      alert('DISPLAY UPDATE ERROR: ', err.message)
+      alert('AUTH STATUS ERROR: ', err.message)
     }
   }
 }
@@ -173,6 +174,26 @@ export function removeOpenMic(id) {
       dispatch(deleteOpenMicACT(respId))
     } catch (err) {
       alert('REMOVE OPEN MIC ERROR: ', err.message)
+    }
+  }
+}
+
+// AUTH INFO
+
+export function updateAuthACT(token) {
+  return {
+    type: USER_TOKEN,
+    payload: token,
+  }
+}
+
+export function setUserToken(token) {
+  return async (dispatch) => {
+    try {
+      console.log('AUTH Token: ', token)
+      dispatch(updateAuthACT(token))
+    } catch (err) {
+      alert('AUTH STATUS ERROR: ', err.message)
     }
   }
 }
