@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGuitar } from '@fortawesome/free-solid-svg-icons'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth } from '../firebase-config'
+
 const Nav = () => {
+  const [user, setUser] = useState(false)
+  const token = useSelector((state) => state.authReducer)
+  token && console.log(token)
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
+
+  const logout = async () => {
+    await signOut(auth)
+  }
+
   return (
     <>
       <nav className="nav-container">
@@ -30,17 +46,19 @@ const Nav = () => {
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link to="/SignIn">
-                <p>Sign In</p>
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to="/SignUp">
-                <p>Sign Up</p>
-              </Link>
-            </li>
+            {user ? (
+              <li className="nav-item">
+                <Link to="/">
+                  <p onClick={logout}>Log Out</p>
+                </Link>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link to="/signin">
+                  <p>Sign In</p>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

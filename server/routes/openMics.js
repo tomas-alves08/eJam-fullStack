@@ -59,9 +59,11 @@ router.patch('/:id', async (req, res) => {
 
   console.log('Router Update: ', id, openMicUpdateData)
   try {
-    const updatedData = await db.updateOneOpenMic(openMicUpdateData, id)
-    const dataArr = await db.getAllOpenMics()
-    res.json(dataArr)
+    await db.updateOneOpenMic(openMicUpdateData, id)
+    const updatedData = await db.getOneOpenMic(id)
+    console.log('Router Patch: ', updatedData)
+    // const dataArr = await db.getAllOpenMics()
+    res.json(updatedData)
   } catch (err) {
     res.status(500).send(err.message)
   }

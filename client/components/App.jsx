@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 
 import Nav from './Nav'
 import Home from './Home'
-// import About from './About'
+import AuthForm from './AuthForm'
 import Contact from './Contact'
 import Register from './Register'
 import OpenMics from './OpenMics'
@@ -29,7 +29,7 @@ function App() {
       <div>
         <Routes>
           <Route path={'/'} element={<Home />} />
-          {/* <Route path={'/about'} element={<About />} /> */}
+          <Route path={'/signin'} element={<AuthForm />} />
           <Route path={'/contact'} element={<Contact />} />
           <Route
             path={'/register'}

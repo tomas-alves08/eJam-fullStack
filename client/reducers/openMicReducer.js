@@ -7,6 +7,7 @@ function openMicRed(state = [], action) {
     case DISPLAY_OPENMICS:
       return payload
     case DISPLAY_OPENMIC:
+      console.log('DISPLAY_OPENMIC payload: ', payload)
       return payload
     default:
       return state

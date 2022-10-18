@@ -15,6 +15,7 @@ export const ADD_OPENMIC = 'ADD_OPENMIC'
 export const UPDATE_OPENMICS = 'UPDATE_OPENMICS'
 export const UPDATE_DISPLAY = 'UPDATE_DISPLAY'
 export const DELETE_OPENMICS = 'DELETE_OPENMICS'
+export const USER_TOKEN = 'USER_TOKEN'
 
 // GET OPENMICS ACTIONS
 
@@ -31,15 +32,15 @@ export function fetchOpenMics() {
       const respArr = await getOpenMicsAPI()
       dispatch(getOpenMicsACT(respArr))
     } catch (err) {
-      console.log('FETCH OPEN MIC ERROR: ', err.message)
+      alert('FETCH OPEN MIC ERROR: ', err.message)
     }
   }
 }
 
-export function getOneOpenMicACT(id) {
+export function getOneOpenMicACT(openMic) {
   return {
     type: DISPLAY_OPENMIC,
-    payload: id,
+    payload: openMic,
   }
 }
 
@@ -47,9 +48,10 @@ export function fetchOneOpenMic(id) {
   return async (dispatch) => {
     try {
       const resp = await getOneOpenMicAPI(id)
+      console.log('GEt One Open Mic: ', resp)
       dispatch(getOneOpenMicACT(resp))
     } catch (err) {
-      console.log('FETCH ONE OPEN MIC ERROR: ', err.message)
+      alert('FETCH ONE OPEN MIC ERROR: ', err.message)
     }
   }
 }
@@ -75,7 +77,7 @@ export function findOpenMics(foundCity) {
       console.log('Find open mics: ', foundOpenMics)
       dispatch(searchOpenMicsACT(foundOpenMics, foundCity))
     } catch (err) {
-      console.log('FIND OPEN MIC: ', err.message)
+      alert('FIND OPEN MIC: ', err.message)
     }
   }
 }
@@ -106,7 +108,7 @@ export function createOpenMic(openMic) {
       console.log('resp created: ', respOneOpenMic)
       dispatch(addOpenMicACT(respOneOpenMic))
     } catch (err) {
-      console.log('CREATE OPEN MIC ERROR: ', err.message)
+      alert('CREATE OPEN MIC ERROR: ', err.message)
     }
   }
 }
@@ -128,7 +130,7 @@ export function showUpdate(status, id) {
     try {
       dispatch(displayUpdateACT(status, id))
     } catch (err) {
-      console.log('DISPLAY UPDATE ERROR: ', err.message)
+      alert('AUTH STATUS ERROR: ', err.message)
     }
   }
 }
@@ -145,9 +147,12 @@ export function changeOpenMic(id, openMic) {
     try {
       console.log(openMic)
       const resp = await updateOpenMicAPI(id, openMic)
+
+      console.log('NOTE: ', resp)
+
       dispatch(updateOpenMicACT(resp))
     } catch (err) {
-      console.log('UPDATE OPEN MIC ERROR: ', err.message)
+      alert('UPDATE OPEN MIC ERROR: ', err.message)
     }
   }
 }
@@ -168,7 +173,27 @@ export function removeOpenMic(id) {
       console.log('Action delete: ', respId)
       dispatch(deleteOpenMicACT(respId))
     } catch (err) {
-      console.log('REMOVE OPEN MIC ERROR: ', err.message)
+      alert('REMOVE OPEN MIC ERROR: ', err.message)
+    }
+  }
+}
+
+// AUTH INFO
+
+export function updateAuthACT(token) {
+  return {
+    type: USER_TOKEN,
+    payload: token,
+  }
+}
+
+export function setUserToken(token) {
+  return async (dispatch) => {
+    try {
+      console.log('AUTH Token: ', token)
+      dispatch(updateAuthACT(token))
+    } catch (err) {
+      alert('AUTH STATUS ERROR: ', err.message)
     }
   }
 }

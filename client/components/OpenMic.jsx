@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { showUpdate, removeOpenMic } from '../actions'
+// import { useHistory } from 'react-router'
+import { showUpdate, removeOpenMic, fetchOneOpenMic } from '../actions'
 import { useDispatch, useSelector } from 'react-redux'
 
-import Form from './Form'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../firebase-config'
 
 const OpenMic = () => {
   const [foundOpenMic, setFoundOpenMic] = useState(null)
@@ -12,12 +14,27 @@ const OpenMic = () => {
   const { openMicId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  // AUTH
+  const [user, setUser] = useState(false)
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser)
+  })
+
+  // REDUX
   let displayUpdate = useSelector((state) => state.updateReducer)
+  // const updatedOpenMic = useSelector((state) => state.showUpdatedReducer)
+  const openMicResp = useSelector((state) => state.openMicRed)
 
-  console.log('displayUpdate: ', displayUpdate)
-  const openMicArr = useSelector((state) => state.openMicRed)
+  console.log('OpenMic Arr: ', openMicResp)
 
-  const selectedOpenMic = openMicArr.find((openMic) => openMic.id == openMicId)
+  let selectedOpenMic =
+    openMicResp.length > 1
+      ? openMicResp?.find((openMic) => openMic.id == openMicId)
+      : openMicResp[0]
+
+  console.log('Selected OpenMic: ', selectedOpenMic)
 
   const handleLoadOpenMic = async () => {
     setFoundOpenMic(selectedOpenMic)
@@ -32,8 +49,10 @@ const OpenMic = () => {
   }
 
   const handleUpdate = async (status, id) => {
+    dispatch(fetchOneOpenMic(openMicId))
     console.log('Open Mic Id: ', openMicId)
     dispatch(showUpdate(true, openMicId))
+
     navigate(`/openMics/${openMicId}/update`)
   }
 
@@ -95,21 +114,23 @@ const OpenMic = () => {
             </p>
           )}
 
-          <div>
-            {foundOpenMic !== null && (
-              <button className="button" onClick={handleUpdate}>
-                Update
-              </button>
-            )}
-            {foundOpenMic !== null && (
-              <button
-                className="button"
-                onClick={() => handleDelete(foundOpenMic?.id)}
-              >
-                Delete
-              </button>
-            )}
-          </div>
+          {user && (
+            <div>
+              {foundOpenMic !== null && (
+                <button className="button" onClick={handleUpdate}>
+                  Update
+                </button>
+              )}
+              {foundOpenMic !== null && (
+                <button
+                  className="button"
+                  onClick={() => handleDelete(foundOpenMic?.id)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
