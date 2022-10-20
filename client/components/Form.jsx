@@ -11,7 +11,6 @@ import {
 } from '../funcs.js'
 
 import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
-import OpenMic from './OpenMic.jsx'
 
 const Form = () => {
   let formFields = {
@@ -30,10 +29,14 @@ const Form = () => {
     instrument_four: '',
     instrument_five: '',
     instrument_six: '',
+    auth_token: '',
   }
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  // AUTH
+  const token = useSelector((state) => state.authReducer)
 
   // Update Redux Store State
   let displayUpdate = useSelector((state) => state.updateReducer)
@@ -42,7 +45,7 @@ const Form = () => {
   console.log('Display Update: ', displayUpdate)
 
   // OpenMics Redux Store State
-  const selectedOpenMic = useSelector((state) => state.openMicRed)
+  const selectedOpenMic = useSelector((state) => state.oneOpenMicRed)
   console.log('Selected OpenMic: ', selectedOpenMic)
   // const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
 
@@ -66,11 +69,13 @@ const Form = () => {
     if (displayUpdate.status) {
       setFormData({
         ...selectedOpenMic,
+        auth_token: token,
         [name]: value,
       })
     } else {
       setFormData({
         ...formData,
+        auth_token: token,
         [name]: value,
       })
     }
@@ -84,6 +89,7 @@ const Form = () => {
 
     setFormData(formFields)
     navigate('/')
+    navigate(0)
   }
 
   const handleUpdate = async (e) => {

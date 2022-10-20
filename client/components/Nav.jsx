@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserToken } from '../actions'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGuitar } from '@fortawesome/free-solid-svg-icons'
@@ -15,12 +16,15 @@ const Nav = () => {
   const token = useSelector((state) => state.authReducer)
   token && console.log(token)
 
+  const dispatch = useDispatch()
+
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
   })
 
   const logout = async () => {
     await signOut(auth)
+    dispatch(setUserToken(''))
   }
 
   return (
