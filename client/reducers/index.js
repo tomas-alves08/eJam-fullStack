@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 import openMicRed from './openMicReducer'
+import oneOpenMicRed from './oneOpenMicReducer'
 import addReducer from './addReducer'
 import deleteReducer from './deleteReducer'
 import updateReducer from './updateReducer'
@@ -10,6 +11,7 @@ import authReducer from './authReducer'
 
 export default combineReducers({
   openMicRed,
+  oneOpenMicRed,
   searchReducer,
   addReducer,
   deleteReducer,

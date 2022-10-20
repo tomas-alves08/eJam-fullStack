@@ -65,7 +65,7 @@ const OpenMic = () => {
 
   useEffect(() => {
     handleLoadOpenMic()
-    if (selectedOpenMic?.auth_token == token) setAuthorization(true)
+    if (selectedOpenMic?.auth_token === token) setAuthorization(true)
   }, [selectedOpenMic])
 
   return (

@@ -45,7 +45,7 @@ const Form = () => {
   console.log('Display Update: ', displayUpdate)
 
   // OpenMics Redux Store State
-  const selectedOpenMic = useSelector((state) => state.openMicRed)
+  const selectedOpenMic = useSelector((state) => state.oneOpenMicRed)
   console.log('Selected OpenMic: ', selectedOpenMic)
   // const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
 
@@ -89,6 +89,7 @@ const Form = () => {
 
     setFormData(formFields)
     navigate('/')
+    navigate(0)
   }
 
   const handleUpdate = async (e) => {
