@@ -4,7 +4,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
 } from 'firebase/auth'
 import { auth } from '../firebase-config'
 import { useDispatch } from 'react-redux'
@@ -30,7 +29,7 @@ const AuthForm = () => {
 
   console.log('USER TOKEN: ', userInfo?.accessToken)
 
-  const token = userInfo?.accessToken ? userInfo.accessToken : ''
+  const token = userInfo?.uid ? userInfo.uid : ''
 
   console.log('USER TOKEN: ', token)
 
@@ -52,7 +51,7 @@ const AuthForm = () => {
         registerPassword
       )
       console.log('USER INFO: ', userInfo)
-      dispatch(setUserToken(user.user.accessToken))
+      dispatch(setUserToken(user.user.uid))
       alert(`user ${registerEmail} created successfully`)
       navigate('/')
     } catch (err) {
@@ -75,7 +74,7 @@ const AuthForm = () => {
       )
       console.log('USER INFO: ', user)
       console.log('TOKEN INFO: ', user.user.accessToken)
-      dispatch(setUserToken(user.user.accessToken))
+      dispatch(setUserToken(user.user.uid))
       navigate('/')
     } catch (err) {
       alert('Register Error: ', err)

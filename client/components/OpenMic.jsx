@@ -10,6 +10,7 @@ import { auth } from '../firebase-config'
 const OpenMic = () => {
   const [foundOpenMic, setFoundOpenMic] = useState(null)
   const [displayOpenMic, setDisplayOpenMic] = useState(false)
+  const [authorization, setAuthorization] = useState(false)
 
   const { openMicId } = useParams()
   const navigate = useNavigate()
@@ -21,6 +22,8 @@ const OpenMic = () => {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
   })
+
+  const token = useSelector((state) => state.authReducer)
 
   // REDUX
   let displayUpdate = useSelector((state) => state.updateReducer)
@@ -35,6 +38,10 @@ const OpenMic = () => {
       : openMicResp[0]
 
   console.log('Selected OpenMic: ', selectedOpenMic)
+  console.log('UID: ', selectedOpenMic?.auth_token)
+  console.log('Token: ', token)
+
+  console.log('Authorization: ', authorization)
 
   const handleLoadOpenMic = async () => {
     setFoundOpenMic(selectedOpenMic)
@@ -58,6 +65,7 @@ const OpenMic = () => {
 
   useEffect(() => {
     handleLoadOpenMic()
+    if (selectedOpenMic?.auth_token == token) setAuthorization(true)
   }, [selectedOpenMic])
 
   return (
@@ -114,7 +122,7 @@ const OpenMic = () => {
             </p>
           )}
 
-          {user && (
+          {authorization && (
             <div>
               {foundOpenMic !== null && (
                 <button className="button" onClick={handleUpdate}>
