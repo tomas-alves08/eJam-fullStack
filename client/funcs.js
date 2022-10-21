@@ -34,6 +34,7 @@ export const instrumentsArr = [
   'Eletric Guitar',
   'Bass',
   'Drum Kit',
+  'keyboard',
   'Cajon',
   'Congas',
   'Bongos',

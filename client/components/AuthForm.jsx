@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth'
 import { auth } from '../firebase-config'
+
 import { useDispatch } from 'react-redux'
 import { setUserToken } from '../actions'
 
@@ -25,32 +27,15 @@ const AuthForm = () => {
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
 
-  const [userInfo, setUserInfo] = useState({})
-
-  console.log('USER TOKEN: ', userInfo?.accessToken)
-
-  const token = userInfo?.uid ? userInfo.uid : ''
-
-  console.log('USER TOKEN: ', token)
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUserInfo(currentUser)
-  })
-
   const register = async (e) => {
     e.preventDefault()
 
-    console.log('Loged in? ', isLogin)
-    console.log('Auth: ', auth)
-    console.log('Register Email: ', registerEmail)
-    console.log('register password: ', registerPassword)
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       )
-      console.log('USER INFO: ', userInfo)
       dispatch(setUserToken(user.user.uid))
       alert(`user ${registerEmail} created successfully`)
       navigate('/')
@@ -62,18 +47,12 @@ const AuthForm = () => {
   const login = async (e) => {
     e.preventDefault()
 
-    console.log('Loged in? ', isLogin)
-    console.log('Auth: ', auth)
-    console.log('Register Email: ', registerEmail)
-    console.log('register password: ', registerPassword)
     try {
       const user = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       )
-      console.log('USER INFO: ', user)
-      console.log('TOKEN INFO: ', user.user.accessToken)
       dispatch(setUserToken(user.user.uid))
       navigate('/')
     } catch (err) {
@@ -125,8 +104,6 @@ const AuthForm = () => {
             >
               {isLogin ? 'Create new account' : 'Login with existing account'}
             </button>
-            {/* <button onClick={logout}>Log Out</button> */}
-            <h1>{userInfo?.email}</h1>
           </div>
         </form>
       </section>
