@@ -41,13 +41,9 @@ const Form = () => {
   // Update Redux Store State
   let displayUpdate = useSelector((state) => state.updateReducer)
   const formDataId = displayUpdate.id
-  // const status = displayUpdate.status
-  console.log('Display Update: ', displayUpdate)
 
   // OpenMics Redux Store State
   const selectedOpenMic = useSelector((state) => state.oneOpenMicRed)
-  console.log('Selected OpenMic: ', selectedOpenMic)
-  // const selectedOpenMic = openMicArr.find((openMic) => openMic.id == formDataId)
 
   if (displayUpdate.status === true) {
     formFields = { ...selectedOpenMic }
@@ -55,16 +51,10 @@ const Form = () => {
 
   const [formData, setFormData] = useState(formFields)
 
-  console.log('status: ', displayUpdate.status)
-  console.log('Form Fields: ', formFields)
-
-  // Functions
+  // FUNCTIONS
   const handleChange = (e) => {
     const name = e.target.name
     const value = e.target.value
-    console.log(e.target.value)
-
-    console.log('SELECTED OPEN MIC: ', selectedOpenMic)
 
     if (displayUpdate.status) {
       setFormData({
@@ -83,7 +73,6 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Handle Submit:', formData)
 
     dispatch(createOpenMic(formData))
 
@@ -94,11 +83,10 @@ const Form = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
-    console.log('FormData: ', formData)
-    // const updatedOpenMic = formData.find((item) => item.id === formDataId)
-    dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
 
+    dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
     dispatch(showUpdate(false, formDataId))
+
     setFormData(formFields)
     displayUpdate.status = false
     navigate(`/openMics/${formDataId}`)

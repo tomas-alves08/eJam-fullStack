@@ -16,6 +16,7 @@ const HomeDescription = () => {
   const handleClick = () => {
     navigate('/register')
   }
+
   return (
     <>
       <div className="description-container">
@@ -27,7 +28,7 @@ const HomeDescription = () => {
             <img
               className="icon"
               id="Guitar-icon"
-              src="./img/instrument1.png"
+              src="./img/Guitar.png"
               alt="Guitar-icon"
             />
           </div>
@@ -35,7 +36,7 @@ const HomeDescription = () => {
             <img
               className="icon"
               id="Keyboard-icon"
-              src="./img/instrument2.png"
+              src="./img/Keyboard.png"
               alt="Keyboard-icon"
             />
           </div>
@@ -43,7 +44,7 @@ const HomeDescription = () => {
             <img
               className="icon"
               id="Congas-icon"
-              src="./img/instrument4.png"
+              src="./img/Congas.png"
               alt="congas-icon"
             />
           </div>
@@ -51,7 +52,7 @@ const HomeDescription = () => {
             <img
               className="icon"
               id="Mic-icon"
-              src="./img/instrument5.png"
+              src="./img/Mic.png"
               alt="mic-icon"
             />
           </div>
@@ -59,7 +60,7 @@ const HomeDescription = () => {
             <img
               className="icon"
               id="Saxophone-icon"
-              src="./img/instrument6.png"
+              src="./img/Saxophone.png"
               alt="saxophone-icon"
             />
           </div>

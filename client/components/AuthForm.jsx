@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
 } from 'firebase/auth'
 import { auth } from '../firebase-config'
 
@@ -83,7 +82,6 @@ const AuthForm = () => {
             <input
               type="password"
               id="password"
-              //   value={isLogin ? loginPassword || '' : registerPassword || ''}
               onChange={
                 isLogin
                   ? (e) => setLoginPassword(e.target.value)
