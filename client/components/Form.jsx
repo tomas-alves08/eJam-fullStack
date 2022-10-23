@@ -89,7 +89,8 @@ const Form = () => {
 
     setFormData(formFields)
     displayUpdate.status = false
-    navigate(`/openMics/${formDataId}`)
+
+    navigate(`/`)
 
     // this command refreshes the page
     navigate(0)

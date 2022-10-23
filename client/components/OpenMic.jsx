@@ -35,6 +35,7 @@ const OpenMic = () => {
     dispatch(removeOpenMic(openMicId))
     alert('Open Deleted')
     navigate('/')
+    navigate(0)
   }
 
   const handleUpdate = async (status, id) => {
@@ -46,7 +47,13 @@ const OpenMic = () => {
 
   // USE EFFECT
   useEffect(() => {
-    if (selectedOpenMic?.auth_token === token) setAuthorization(true)
+    console.log('Selected OpenMic Auth: ', selectedOpenMic?.auth_token)
+    console.log('Token: ', token)
+    if (
+      selectedOpenMic?.auth_token === token ||
+      selectedOpenMic?.auth_token == user?.uid
+    )
+      setAuthorization(true)
   }, [selectedOpenMic])
 
   return (
