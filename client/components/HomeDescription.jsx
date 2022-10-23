@@ -69,8 +69,10 @@ const HomeDescription = () => {
           <p className="subtitle">FIND AN OPEN MIC CLOSE TO YOU</p>
         </div>
         <div className="text-container">
-          <p className="text">
-            All open mic enthusiasts are welcome whether you are:
+          <div>
+            <p className="text">
+              All open mic enthusiasts are welcome whether you are:
+            </p>
             <ul className="bullet-points">
               <li>
                 Looking for a place to perform or jam with other like minded
@@ -79,7 +81,7 @@ const HomeDescription = () => {
               <li>Trying to promote your venue</li>
               <li>Just looking for live music</li>
             </ul>
-          </p>
+          </div>
         </div>
         <div className="phrase-container">
           <p className="phrase">Share your music, share your love!</p>
