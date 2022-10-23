@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchOpenMics, showUpdate } from '../actions'
+import { sorter } from '../funcs'
 
 const OpenMics = () => {
   const searchData = useSelector((state) => state.searchReducer)
@@ -14,6 +15,13 @@ const OpenMics = () => {
     dispatch(fetchOpenMics())
     dispatch(showUpdate(false, ''))
   }
+
+  // SORT OPEN MICS BY WEEK DAY
+  const sortedOpenMics = openMicArr?.sort(function sortByDay(a, b) {
+    let day1 = a.day
+    let day2 = b.day
+    return sorter[day1] - sorter[day2]
+  })
 
   useEffect(() => {
     handleLoad()
@@ -34,7 +42,7 @@ const OpenMics = () => {
           : openMicArr && (
               <div className="openMics-card-container">
                 {openMicArr?.map((openMic) => (
-                  <div className="openMic-card">
+                  <div key={openMic.id} className="openMic-card">
                     {openMic?.venue && (
                       <Link to={`/openMics/${openMic?.id}`}>
                         <h2 className="openMic-venue" key={openMic?.id}>

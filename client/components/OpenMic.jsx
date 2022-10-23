@@ -54,6 +54,8 @@ const OpenMic = () => {
       selectedOpenMic?.auth_token == user?.uid
     )
       setAuthorization(true)
+
+    window.scrollTo(0, 0)
   }, [selectedOpenMic])
 
   return (

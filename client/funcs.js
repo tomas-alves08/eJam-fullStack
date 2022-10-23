@@ -60,6 +60,16 @@ export const monthsArr = [
   'DEC',
 ]
 
+export const sorter = {
+  Sunday: 0,
+  Monday: 1,
+  Tuesday: 2,
+  Wednesday: 3,
+  Thursday: 4,
+  Friday: 5,
+  Saturday: 6,
+}
+
 // Cities in NZ
 export const citiesNorthIsland = citiesData.filter(
   (city) => city.lat >= -41.2889
