@@ -23,8 +23,6 @@ const OpenMics = () => {
     return sorter[day1] - sorter[day2]
   })
 
-  console.log(sortedOpenMics)
-
   useEffect(() => {
     handleLoad()
   }, [openMicArr])
@@ -44,7 +42,7 @@ const OpenMics = () => {
           : openMicArr && (
               <div className="openMics-card-container">
                 {openMicArr?.map((openMic) => (
-                  <div className="openMic-card">
+                  <div key={openMic.id} className="openMic-card">
                     {openMic?.venue && (
                       <Link to={`/openMics/${openMic?.id}`}>
                         <h2 className="openMic-venue" key={openMic?.id}>

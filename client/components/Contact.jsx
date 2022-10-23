@@ -2,6 +2,8 @@ import React from 'react'
 
 const Contact = () => {
   const year = new Date().getFullYear()
+
+  window.scrollTo(0, 0)
   return (
     <div className="contact-container">
       {' '}

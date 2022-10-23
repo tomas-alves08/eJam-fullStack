@@ -17,6 +17,7 @@ const Update = () => {
 
   useEffect(() => {
     authorize()
+    window.scrollTo(0, 0)
   }, [updatedOpenMic])
 
   console.log(displayUpdate)

@@ -17,6 +17,8 @@ const HomeDescription = () => {
     navigate('/register')
   }
 
+  window.scrollTo(0, 0)
+
   return (
     <>
       <div className="description-container">
