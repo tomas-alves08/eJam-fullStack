@@ -36,6 +36,7 @@ const Nav = () => {
             <FontAwesomeIcon className="icon-guitar" icon={faGuitar} />
           </div>
         </Link>
+
         <div className="nav-items">
           <ul>
             <li className="nav-item">

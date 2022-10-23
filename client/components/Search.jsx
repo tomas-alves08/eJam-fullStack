@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { findOpenMics } from '../actions'
 
 import citiesData from '../../nz.json'
 
 const Search = () => {
-  const displayUpdate = useSelector((state) => state.updateReducer)
-  const openMicsArr = useSelector((state) => state.openMicRed)
   const dispatch = useDispatch()
+  const [search, setSearch] = useState('')
 
   let city = ''
 
-  const [search, setSearch] = useState('')
-
   const handleChange = (e) => {
     let value = e.target.value
-    let city
 
     if (value.length > 0) {
       city = value[0].toUpperCase() + value.slice(1).toLowerCase()
@@ -32,11 +28,8 @@ const Search = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    console.log('Handle Search: ', city[0]?.city)
 
     dispatch(findOpenMics(city[0]?.city ? city[0]?.city : ''))
-
-    // setSearch('')
   }
 
   return (
