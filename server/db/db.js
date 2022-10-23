@@ -1,6 +1,3 @@
-// const config = require('./knexfile').development
-// const conn = require('knex')(config)
-
 const knex = require('knex')
 const config = require('./knexfile')
 const env = process.env.NODE_ENV || 'development'
@@ -23,7 +20,6 @@ function getTheOpenMic(id, db = conn) {
 }
 
 function deleteOneOpenMic(id, db = conn) {
-  console.log('DB: ', id, typeof id)
   return db('openMics').del().where('id', id)
 }
 
