@@ -15,7 +15,6 @@ const AuthForm = () => {
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState)
-    console.log(isLogin)
   }
 
   const dispatch = useDispatch()
