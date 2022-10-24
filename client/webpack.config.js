@@ -3,8 +3,6 @@ const path = require('path')
 const webpack = require('webpack')
 require('dotenv').config()
 
-// const Dotenv = require('dotenv-webpack')
-
 module.exports = {
   mode: 'development',
   entry: path.join(__dirname, 'index.js'),
@@ -15,10 +13,6 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      // 'process.env': JSON.stringify(dotenv.parsed),
-      // 'process.env.NODE_ENV': JSON.stringify(
-      //   isDevelopment ? 'development' : 'production'
-      // ),
       'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
       'process.env.AUTH_DOMAIN': JSON.stringify(process.env.AUTH_DOMAIN),
       'process.env.PROJECT_ID': JSON.stringify(process.env.PROJECT_ID),
@@ -30,8 +24,6 @@ module.exports = {
       'process.env.MEASUREMENT_ID': JSON.stringify(process.env.MEASUREMENT_ID),
     }),
   ],
-
-  // plugins: [new Dotenv()],
 
   module: {
     rules: [
