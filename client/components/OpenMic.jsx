@@ -9,6 +9,8 @@ import { auth } from '../firebase-config'
 const OpenMic = () => {
   const [authorization, setAuthorization] = useState(false)
 
+  // console.log('CONTEXT ITEMS OPEN MIC COMP: ', changeState, changeStateDispatch)
+
   const { openMicId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()

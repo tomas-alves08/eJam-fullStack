@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { findOpenMics } from '../actions'
-
 import citiesData from '../../nz.json'
 
 const Search = () => {
