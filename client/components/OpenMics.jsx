@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchOpenMics, showUpdate } from '../actions'
 import { sorter } from '../funcs'
 
+import ContextHook from '../useContext/context-hook'
+
 const OpenMics = () => {
   const searchData = useSelector((state) => state.searchReducer)
+  const { changeState } = useContext(ContextHook)
   const dispatch = useDispatch()
 
   const city = searchData.city
   const openMicArr = searchData.foundData
 
-  const handleLoad = async () => {
+  const handleLoad = () => {
     dispatch(fetchOpenMics())
     dispatch(showUpdate(false, ''))
   }
@@ -23,8 +26,11 @@ const OpenMics = () => {
     return sorter[day1] - sorter[day2]
   })
 
-  useEffect(() => {
-    handleLoad()
+  useEffect(async () => {
+    await handleLoad()
+
+    console.log('OPENMICS COMP openMicArr: ', openMicArr)
+    console.log('OPENMICS COMP changeState: ', changeState)
   }, [openMicArr])
 
   return (

@@ -1,17 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../firebase-config'
-
-const HomeDescription = () => {
+const HomeDescription = ({ user }) => {
   const navigate = useNavigate()
-
-  const [user, setUser] = useState(false)
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  })
 
   const handleClick = () => {
     navigate('/register')

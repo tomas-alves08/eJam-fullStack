@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
+import ContextHook from '../useContext/context-hook'
+
 import Nav from './Nav'
 import Home from './Home'
 import AuthForm from './AuthForm'
@@ -25,7 +27,7 @@ function App() {
     <>
       <Nav />
 
-      <div>
+      <ContextHook.Provider value={{}}>
         <Routes>
           <Route path={'/'} element={<Home />} />
           <Route path={'/signin'} element={<AuthForm />} />
@@ -35,7 +37,7 @@ function App() {
           <Route path="openMics/:openMicId" element={<OpenMic />} />
           <Route path="openMics/:openMicId/update" element={<Update />} />
         </Routes>
-      </div>
+      </ContextHook.Provider>
       <Footer />
     </>
   )
