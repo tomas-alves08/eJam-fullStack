@@ -1,9 +1,5 @@
-import React, { useState, useReducer } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  login_reducer,
-  initialLoginReducer,
-} from '../useReducer-funcs/state-change-reducer'
 
 import {
   createUserWithEmailAndPassword,
@@ -23,12 +19,6 @@ const AuthForm = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  // STATES
-  const [loginState, loginDispatch] = useReducer(
-    login_reducer,
-    initialLoginReducer
-  )
 
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')

@@ -177,6 +177,7 @@ export function updateAuthACT(token) {
 }
 
 export function setUserToken(token) {
+  console.log('Action Index token: ', token)
   return async (dispatch) => {
     try {
       dispatch(updateAuthACT(token))

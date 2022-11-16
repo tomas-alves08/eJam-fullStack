@@ -37,6 +37,7 @@ const Form = () => {
 
   // AUTH
   const token = useSelector((state) => state.authReducer)
+  console.log('Form Token: ', token)
 
   // Update Redux Store State
   let displayUpdate = useSelector((state) => state.updateReducer)
