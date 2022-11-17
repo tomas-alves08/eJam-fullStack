@@ -1,4 +1,3 @@
-import React from 'react'
 import citiesData from '../nz.json'
 
 // Dropdown Arrays
@@ -78,3 +77,10 @@ export const citiesNorthIsland = citiesData.filter(
 export const citiesSouthIsland = citiesData.filter(
   (city) => city.lat < -41.2889
 )
+
+// export const citiesNorthIsland = citiesNorthIslandPreliminar.unshift({
+//   city: 'Select City in North Island',
+// })
+// export const citiesSouthIsland = citiesSouthIslandPreliminar.unshift({
+//   city: 'Select City in South Island',
+// })

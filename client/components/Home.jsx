@@ -19,8 +19,6 @@ const Home = () => {
     setUser(currentUser)
   })
 
-  console.log('Home token: ', user?.uid)
-
   if (user) dispatch(setUserToken(user?.uid))
 
   return (

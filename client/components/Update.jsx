@@ -20,7 +20,6 @@ const Update = () => {
     window.scrollTo(0, 0)
   }, [updatedOpenMic])
 
-  console.log(displayUpdate)
   return (
     <div className="update-page-container">
       {authorization && (
