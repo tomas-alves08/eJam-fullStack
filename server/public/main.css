@@ -73,7 +73,7 @@ a:hover {
 
 .home-container {
   display: flex;
-  width: 1200px;
+  max-width: 1200px;
 }
 
 .description-container {
@@ -326,7 +326,7 @@ button {
   }
 
   .description-container {
-    width: 100%;
+    width: 100vw;
     height: 75vh;
   }
 
@@ -515,11 +515,11 @@ button {
 
 /* EXTRA LARGE SCREEN */
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 1050px) {
   /* For cellphone: */
 
   .home-container {
-    width: 75%;
+    width: 80%;
     margin: auto;
   }
 
