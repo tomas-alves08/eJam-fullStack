@@ -12,6 +12,9 @@ import {
 
 import { createOpenMic, changeOpenMic, showUpdate } from '../actions'
 
+citiesNorthIsland.unshift({ city: 'Select City of North Island' })
+citiesSouthIsland.unshift({ city: 'Select City of South Island' })
+
 const Form = () => {
   let formFields = {
     venue: '',
@@ -37,7 +40,6 @@ const Form = () => {
 
   // AUTH
   const token = useSelector((state) => state.authReducer)
-  console.log('Form Token: ', token)
 
   // Update Redux Store State
   let displayUpdate = useSelector((state) => state.updateReducer)
@@ -57,8 +59,6 @@ const Form = () => {
     const name = e.target.name
     const value = e.target.value
 
-    console.log('FORM displayStatus', displayUpdate.status)
-
     if (displayUpdate.status) {
       setFormData({
         ...formData,
@@ -74,10 +74,17 @@ const Form = () => {
     }
   }
 
-  console.log('FORM formData: ', formData)
-
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (
+      formData.city === 'Select City of North Island' ||
+      formData.city === 'Select City of South Island' ||
+      formData.city === ''
+    ) {
+      alert('Please Choose A City From The List!')
+      return
+    }
 
     dispatch(createOpenMic(formData))
 
@@ -88,6 +95,15 @@ const Form = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault()
+
+    if (
+      formData.city === 'Select City of North Island' ||
+      formData.city === 'Select City of South Island' ||
+      formData.city === ''
+    ) {
+      alert('Please Choose A City From The List!')
+      return
+    }
 
     dispatch(changeOpenMic(formDataId, { ...formData, id: formDataId }))
     dispatch(showUpdate(false, formDataId))
@@ -177,7 +193,6 @@ const Form = () => {
               </td>
               <td>
                 <input
-                  // type="text"
                   id="pub"
                   name="venue"
                   defaultValue={
@@ -198,7 +213,6 @@ const Form = () => {
               <td>
                 <input
                   id="location"
-                  // type="text"
                   name="location"
                   defaultValue={
                     displayUpdate?.status

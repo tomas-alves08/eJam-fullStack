@@ -14,7 +14,6 @@ import { auth } from '../firebase-config'
 const Nav = () => {
   const [user, setUser] = useState(false)
   const token = useSelector((state) => state.authReducer)
-  token && console.log(token)
 
   const dispatch = useDispatch()
 

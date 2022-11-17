@@ -5,7 +5,6 @@ function oneOpenMicRed(state = [], action) {
 
   switch (type) {
     case DISPLAY_OPENMIC:
-      console.log('DISPLAY_OPENMIC payload: ', payload)
       return payload
     default:
       return state
