@@ -110,8 +110,8 @@ a:hover {
   justify-content: center;
   width: 100%;
   margin: 0 auto;
-  padding-top: 10px;
-  padding-bottom: 20px;
+  padding: 10px auto 0;
+  /* padding-bottom: 20px; */
 }
 
 .instrument-icon {
@@ -274,7 +274,7 @@ button {
 }
 
 .openMics-card-container {
-  height: 500px;
+  height: 420px;
   overflow: auto;
 }
 
@@ -361,7 +361,7 @@ button {
   }
 
   .openMics-card-container {
-    height: 600px;
+    height: 530px;
   }
 
   .contact-container {
@@ -492,15 +492,16 @@ button {
   }
 
   .openmic-page {
-    margin: 20px 5px;
+    margin: 20px auto;
+    width: 100%;
   }
 
   .openmic-page-venue {
-    font-size: 2em;
+    font-size: 1em;
   }
 
   .openmic-page-info {
-    font-size: 1em;
+    font-size: 0.7em;
   }
 
   .signup-container {
@@ -561,7 +562,8 @@ button {
 }
 
 .openmic-page {
-  margin: 20px 50px;
+  margin: 20px auto;
+  width: 60%;
   padding: 15px;
   border: 1.5px solid rgb(75, 19, 19);
   border-radius: 10px;
@@ -569,13 +571,13 @@ button {
 }
 
 .openmic-page-venue {
-  font-size: 3em;
+  font-size: 2em;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
 .openmic-page-info {
-  font-size: 1.2em;
+  font-size: 0.9em;
   margin-bottom: 5px;
   color: #27292e;
 }
