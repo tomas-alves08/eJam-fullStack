@@ -1,5 +1,11 @@
 # eJam: A Fullstack Application
 
+## Deployed App
+
+Please find App deployed version URL below:
+
+### https://ejam-fullstack-production.up.railway.app/
+
 ---
 
 ## Goal Of The Application
