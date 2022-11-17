@@ -1,8 +1,9 @@
+import React from 'react'
 import citiesData from '../nz.json'
 
 // Dropdown Arrays
 export const weekdayArr = [
-  'Select Day of the Week',
+  'Day of the Week',
   'Monday',
   'Tuesday',
   'Wednesday',
@@ -13,7 +14,7 @@ export const weekdayArr = [
 ]
 
 export const frequencyArr = [
-  'Select the Frequency of the Event',
+  'Frequency of the Event',
   'Weekly',
   'Fortnightly',
   'Monthly',
@@ -21,7 +22,7 @@ export const frequencyArr = [
 ]
 
 export const weekOfTheMonthArr = [
-  'Select the week of the month',
+  'Week of the month',
   'First',
   'Second',
   'Third',
@@ -34,7 +35,7 @@ export const instrumentsArr = [
   'Eletric Guitar',
   'Bass',
   'Drum Kit',
-  'keyboard',
+  'Keyboard',
   'Cajon',
   'Congas',
   'Bongos',
