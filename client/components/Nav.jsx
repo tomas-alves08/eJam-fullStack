@@ -44,11 +44,11 @@ const Nav = () => {
               </Link>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/contact">
                 <FontAwesomeIcon icon={faEnvelope} />
               </Link>
-            </li>
+            </li> */}
 
             {user ? (
               <li className="nav-item">
